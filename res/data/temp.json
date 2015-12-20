@@ -1,0 +1,10 @@
+{
+    "code": 0,
+    "message":"",
+    "beans": [
+    	{
+    		"proId":"商品id",
+    		"isInvalid":"是否失效"
+    	}
+    ]
+}

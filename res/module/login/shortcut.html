@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>快捷登录</title>
+<% include ../include/res.html %>
+</head>
+<body>
+	<div id="J_content" class="hg-content">
+		<% include ../include/head.html %>
+		<div id="J_body" class="hg-body">
+			<form class="hg-form fn-mgt3" id="J_shortcut_form">
+				<div class="hg-form-block">
+					<div class="hg-form-item fn-border-bottom">
+						<label class="hg-label"><span class="hg-iconfont hg-iconfont-user"></span>手机号码</label>
+						<input name="phone" placeholder="请输入手机号码" type="tel" maxlength = "11"/>
+						
+					</div>
+					<div class="hg-form-item hg-form-btn-input">
+						<label class="hg-label"><span class="hg-iconfont hg-iconfont-msg"></span>验证码</label>
+						<input name="vd" class="" placeholder="请输入验证码" type="tel"/>
+						<span class="hg-btn hg-btn-grey-m" id="J_shortcut_send"><span class="hg-iconfont hg-iconfont-send"></span>发送验证码</span>
+					</div>
+				</div>
+
+				<div class="hg-btn hg-btn-red-l" id="J_shortcut_submit">快捷登录</div>
+			</form>
+			<p class="shortcut-text fn-clear">
+				<a class="hg-text fn-right" href="login.html">使用密码登录></a>
+			</p>
+		</div>
+		<% include ../include/foot.html %>
+	</div>
+	<% include ../include/js.html %>
+	<script type="text/javascript">
+	$('#J_head_title').html('快捷登录');
+	$(function(){
+		$('#J_shortcut_send').makeSendMessage({
+			url:cfg.get('sendMessage'),
+			data:function(){				
+				return hg.form($('#J_shortcut_form')).val().phone;
+			},
+			sec:60
+		});
+		$('#J_shortcut_submit').on('click',function(){
+			var fo=hg.form($('#J_shortcut_form'));
+			var data=fo.val();
+			if(!data.phone||!data.phone.match(hg.regExp.cellphone)){
+				hg.alert('请填写手机号码');
+				return;
+			}
+			if(!data.vd){
+				hg.alert('请填写验证码');
+				return;
+			}
+			hg.data({
+				url:cfg.get('shortcut'),
+				data:data
+			}).done(function(json){
+				//window.location.href='../product/productDetail.html';
+			}).fail(function(){
+				hg.alert('似乎出了点问题，快捷登录失败了。');
+			});
+		});
+	});
+	</script>
+</body>
+</html>

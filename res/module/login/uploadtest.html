@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>测试上传</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link rel="stylesheet" href="../../theme/default/cssnormalize-min.css">
+<script type="text/javascript" src="../../lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="../../lib/jquery.uploadify/2.2/jquery.uploadify.min.js"></script>
+<style type="text/css">
+	.upload-mobile-wrap{
+		width: 320px;
+		border: #DEDEDE 1px solid;
+		height:468px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	.upload-mobile-bar{
+		width:322px;
+		background-color: #ECECEC;
+		padding: 0;
+		margin:0;
+		font-size: 12px;
+		padding: 10px 0;
+		color:#666666;
+		margin-top:2px;
+	}
+	.upload-mobile-bar li{
+		display: inline-block;
+		list-style: none;
+		width:80px;
+		text-align: center;
+		position: relative;
+	}
+	.upload-mobile-bar p{
+		margin:0;
+	}
+	.upload-mobile-item{
+		padding:0 10px;
+		position:relative;
+		width:100%;
+		box-sizing:border-box;
+	}
+	.upload-mobile-item img{
+		width:100%;
+	}
+	.upload-mobile-border{
+		border-top:1px solid #ececec;
+		border-bottom:1px solid #ececec;
+	}
+	.upload-mobile-process{
+		height:3px;
+		width:100%;
+		border:1px solid #ececec;
+	}
+	.upload-mobile-process i{
+		display: inline-block;
+		height:3px;
+		width:10%;
+		background-color: #dc0000;
+		float: left;
+	}
+	.uploadify{
+		display: block;
+		opacity: 0;
+		height:50px;
+		width:50px;
+		position: absolute;
+		top:0;
+		left:0;
+	}
+	.swfupload{
+		top:0;
+		left:0;
+	}
+	.upload-mobile-wrap .uploadify-queue{
+		display: none;
+	}
+	.upload-mobile-op{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top:0;
+		left:0;
+		background-color: rgba(0,0,0,.3);
+		display: none;
+	}
+	.upload-mobile-item .btn{
+		float: right;
+		background-color: #FFF;
+		border:#ececec 1px solid;
+		display: inline-block;
+		padding:4px 8px;
+		font-size: 12px;
+		color:#666666;
+		border-radius: 4px;
+		margin:5px;
+	}
+	.upload-mobile-item .btn:hover{
+		cursor: pointer;
+		background-color: #F8F8F8;
+	}
+	.upload-mobile-item:hover{
+		cursor:pointer;
+	}
+</style>
+</head>
+<body>
+	<div id="J_mobile_detail">
+		<div class="upload-mobile-wrap">
+			
+		</div>
+		<ul class="upload-mobile-bar">
+			<li id="J_show">
+				<div><img width="40%" height="30px;" src="../../test/1.png"/></div>
+				<p>添加图片</p>
+				<div id="J_uploadify" class="upload-mobile-btn"></div>
+			</li>
+		</ul>
+	</div>
+	<div id="J_t">获取html</div>
+	<script type="text/javascript">
+		$(function(){
+			$('#J_mobile_detail').on('click','.upload-mobile-op',function(){
+				$(this).hide();
+			}).on('click','.J_hock',function(){
+				$(this).next().show().parent().siblings().each(function(){
+					$(this).find('.upload-mobile-op').hide();
+				});
+			}).on('click','.up',function(){
+				var p=$(this).parent().parent();
+				p.insertBefore(p.prev());
+				return false;
+			}).on('click','.del',function(){
+				$(this).parent().parent().remove();
+				return false;
+			});
+			var t='<div class="prodet-allinfo-img"><img src="/test/upload/购物车.png"></div><div class="prodet-allinfo-img"><img src="/test/upload/海购365商品详情页-二维码02.jpg"></div>';
+			initMobileDetaiHtml(t);
+
+			$("#J_uploadify").uploadify({
+		        height:50,
+		        swf:'../../lib/jquery.uploadify/2.2/uploadify.swf',
+		        width:80,
+		        uploader:'/upload',
+		        /*buttonClass:'upload-mobile-btn',*/
+		        buttonText:'上传图片',
+		        auto:true,
+		        'overrideEvents' : ['onSelect'],
+		        onSelect:function(file){
+		        	var html='<div class="upload-mobile-item upload-mobile-border"  id="'+file.id+'_">'+
+								'<div class="J_hock">'+
+									'<div class="upload-mobile-imgname">'+file.name+'</div>'+				
+									'<div class="upload-mobile-process">'+
+										'<i></i>'+
+									'</div>'+
+								'</div>'+
+								'<div class="upload-mobile-op">'+
+									'<div class="btn del">删除</div>'+
+									'<div class="btn up">上移</div>'+
+								'</div>'+
+							'</div>';
+					$('.upload-mobile-wrap').append(html);
+		        },
+		        onUploadSuccess : function(file, data, response) {
+		        	var html='<img src="'+data+'"/>'
+		        	$('#'+file.id+'_').removeClass('upload-mobile-border').find('.J_hock').html(html);
+		        },
+		        onUploadProgress : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+		            $('#'+file.id+'_ i').css('width',(bytesUploaded/bytesTotal*100)+'%');
+		        }
+		    });
+			
+			function getHtml(){
+				var str='';
+				$('#J_mobile_detail .J_hock').each(function(){
+					str+='<div class="prodet-allinfo-img">'+$(this).html()+'</div>';
+				});
+				return str;
+			}
+			$('#J_t').on('click',function(){
+				console.log(getHtml());
+				initMobileDetaiHtml(getHtml());
+			});
+		});
+		
+	</script>
+</body>
+</html>

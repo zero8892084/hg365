@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商品详情</title>
+<% include ../include/res.html %>
+</head>
+<body>
+	<div id="J_content" class="hg-content prodet">
+		<% include ../include/detailHead.html %>
+		<div id="J_body" class="hg-body">
+			<div class="hg-box-bt hg-box-animation" id="J_prodet_product">
+				<div class="prodet-play swipe" id="J_prodet_swipe">
+					<div class="swipe-wrap">
+					</div>
+					<div class="prodet-play-count">
+						<i class="prodet-play-count-cur" id="J_prodet_play_index">1</i>
+						<span></span>
+					</div>
+				</div>
+				<div class="hg-box-content fn-mgt17">
+					<div id="J_prodet_base">
+						
+					</div>
+				</div>
+				<div class="hg-box-content fn-mgt17">
+					<div class="hg-box-item">
+						<span class="hg-label">运费</span>
+						<span class="hg-text prodet-exp">从</span>
+						<span class="hg-text prodet-exp">钦州保税仓</span>
+						<span class="hg-text prodet-exp">至</span>
+						<span class="hg-text prodet-exp">南宁青秀区</span>
+					</div>
+					<div  id="J_prodet_type" class="prodet-type">
+					</div>
+					<div class="hg-box-item fn-clear prodet-count" id="">
+						<span class="hg-label prodet-count-label">购买数量</span>
+						<div class="hg-counter" id="J_prodet_counter">
+							<i class="reduce">-</i>
+							<input type="tel" value="1">
+							<i class="add">+</i>
+						</div>
+						<span class="hg-desc play-type-inv" id="J_prodet_inv">(请选择规格)</span>
+					</div>
+				</div>
+				<div class="hg-box-content fn-mgt17">
+					<div class="hg-box-item" id="">
+						<span class="hg-label">税号</span>
+						<span class="hg-text" id="J_prodet_taxid">-</span>
+					</div>
+					<div class="prodet-tax">
+						<span class="hg-label">税费</span>
+						<span class="hg-text-price" id="J_prodet_tax">-</span>
+						<span class="hg-text">(税率为0.44)</span>
+					</div>
+				</div>
+				<div class="prodet-detail-up hg-text" id="J_prodet_updrag">上拉查看详情</div>
+			</div>
+			<div class="hg-box hg-box-bt fn-hide" id="J_prodet_img_wrap">
+				<div class="hg-box-content">
+					<!-- <p class="hg-text prodet-detial-title">图文详情</p> -->
+					<div class="prodet-detial-info" id="J_prodet_imginfo">
+						<p class="正在加载图文详情..."></p>
+					</div>
+				</div>
+			</div>
+			<div class="prodet-foot" id="J_prodet_foot">
+				<span class="hg-btn hg-btn-prodet fn-right">立即购买</span>
+				<span class="hg-btn hg-btn-prodet fn-right">加入购物车</span>
+			</div>
+		</div>
+		<% include ../include/foot.html %>
+	</div>
+	<% include ../include/js.html %>
+	<script type="text/javascript" src="../../lib/Swipe/swipe.js"></script>
+	<textarea class="fn-hide" id="T_prodet_swipe">
+		{{#each this}}
+		<img src="{{this}}">
+		{{/each}}
+	</textarea>
+	<textarea class="fn-hide" id="T_prodet_base">
+		<h3 class="hg-title hg-title-3">{{name}}</h3>
+		<p class="hg-desc">{{desc}}</p>
+		<div class="prodet-price">
+			<span class="hg-text-price">￥{{divide100 price}}</span>
+			<span class="prodet-price-arrow">&nbsp;</span>
+		</div>
+	</textarea>
+	<textarea class="fn-hide" id="T_prodet_type">
+		{{#each this}}
+			<div class="hg-box-item">
+				<span class="hg-label prodet-label">{{type}}</span>
+				<ul class=" prodet-type-list " data-id="{{id}}">
+					{{#each items}}
+						<li data-id="{{id}}">{{label}}</li>
+					{{/each}}
+				</ul>
+			</div>	
+		{{/each}}
+	</textarea>
+	<script type="text/javascript">
+		window.prodetScope={};
+		window.prodetScope.runingFlag=false;
+		$(function(){
+			var productId=hg.url.getUrlVar('id');
+			hg.data({
+				url:cfg.get('productInfo'),
+				data:'productId='+productId
+			}).done(function(json){
+				var sw=$('#J_prodet_swipe').find('.swipe-wrap').temp($('#T_prodet_swipe'),json.bean&&json.bean.imgs).end();
+
+				new Swipe(sw[0],{
+					callback: function(index, element) {
+						$('#J_prodet_play_index').html(index+1);
+					}
+				});
+
+				sw.find('.prodet-play-count span').html('/'+(json.bean&&json.bean.imgs.length));
+
+				$('#J_prodet_base').temp($('#T_prodet_base'),json.bean);
+
+				var typeMap={};
+				var limitLength=json.bean.spec.length;
+				var type=$('#J_prodet_type');
+				type.temp($('#T_prodet_type'),json.bean.spec).on('touchend','li',function(){
+
+					$(this).addClass('cur').siblings().removeClass('cur');
+					var itemId=$(this).data('id');
+					var typeId=$(this).parent('.prodet-type-list').data('id');
+					typeMap[typeId]=itemId;
+					var c=0;
+					for(var i in typeMap){c++};
+					if(c==limitLength){
+						var inv=$('#J_prodet_inv');
+						inv.html('(正在获取...)');
+						hg.data({
+							url:cfg.get('inv'),
+							data:''
+						}).done(function(json){
+							var t=json.bean.total;
+							inv.html('(库存'+t+'件)');
+						}).fail(function(){
+							inv.html('(未获取到库存)');
+						});
+					}
+				});
+
+				var couterCfg={
+					max:199,
+					val:1,
+					min:1,
+					callback:function(i){
+						calcuPrice(i);
+						/*window.location.reload();*/
+					}
+				}
+				$('#J_prodet_counter').makeCounter(couterCfg);
+
+				calcuPrice(couterCfg.val);
+
+				function calcuPrice(i){
+					var price = json.bean.price;
+					var taxRate=json.bean.taxRate/100;
+					var total = i*price*taxRate;
+					$('#J_prodet_tax').html('￥'+(total/100));
+				}
+
+				$('#J_prodet_taxid').html(json.bean.taxId);
+
+				//等待所有页面内容加载完成之后,初始化图文详情面板的位置
+				//var h=$('#J_prodet_updrag').offset().top;
+				var h=$(window).height()*0.6;
+				var o=$('#J_prodet_img_wrap').css({
+					'-webkit-transform':'translate3d(0,'+h+'px,0)',
+					transform:'translate3d(0,'+h+'px,0)',
+					opacity:0
+				});
+
+			}).fail(function(json){
+				hg.alert(json.returnMessage);
+			});
+			
+			
+			hg.jsonp({
+				url:'http://132.37.4.175:8080/storageserver/static/html/56726ed8d01f0a2704067e09.html'
+			}).done(function(json){
+				$('#J_prodet_imginfo').html(json.result+json.result+json.result+json.result)
+			}).fail(function(json){
+				$('#J_prodet_imginfo p').html(json.message);
+			});
+
+			//点击上拉查看详情按钮,展示图文详情
+			$('#J_prodet_updrag').on('touchend',function(){
+				showDetail();
+			});
+			//点击头部两个页签做商品展示或详情展示
+			$('#J_prodet_headtab').on('touchend','li',function(){
+				var i=$(this).index();
+				if(i==0){
+					hideDetail();
+				}else{
+					showDetail();
+				}
+			});
+		});
+			
+		//上拉展示图文详情
+		$(function(){
+			//手指滑动变量初始化
+			var bottomTouchFlag=false;
+			var initY=0;
+			var distance=120;
+			var offset=50;//修正偏移量
+			$('#J_prodet_product').on('touchstart',function(e){
+				var w=$(window);
+				var st = w.scrollTop();
+				var docHeight=$(document).height();
+				var vwHeight=w.height();
+				if(docHeight<st+vwHeight+offset){
+					bottomTouchFlag=true;
+				}else{
+					bottomTouchFlag=false;
+				}
+				initY=e.originalEvent.touches[0].pageY;
+			}).on('touchmove',function(e){
+				move(e);
+			});
+			function move(e){
+				var moveY=e.originalEvent.changedTouches[0].pageY;
+				if(initY-moveY>0&&bottomTouchFlag){
+					e.preventDefault();
+				}
+				if(initY-moveY>distance&&bottomTouchFlag){
+					showDetail();
+				}
+			}
+		});
+		//下拉关闭图文详情
+		$(function(){
+			//手指滑动变量初始化
+			var topTouchFlag=false;
+			var initY=0;
+			var distance=120;
+			var offset=50;//修正偏移量
+			$('#J_prodet_img_wrap').on('touchstart',function(e){
+				var w=$(window);
+				var st = w.scrollTop();
+				if(st<=0){
+					topTouchFlag=true;
+				}else{
+					topTouchFlag=false;
+				}
+				initY=e.originalEvent.touches[0].pageY;
+			}).on('touchmove',function(e){
+				var moveY=e.originalEvent.changedTouches[0].pageY;
+				if(initY-moveY<0&&topTouchFlag){
+					e.preventDefault();
+				}
+				if(Math.abs(initY-moveY)>distance&&topTouchFlag){
+					hideDetail();
+				}
+			});
+		});
+		function showDetail(){
+			if(window.prodetScope.runingFlag)return;
+			window.prodetScope.runingFlag=true;
+			$('#J_prodet_product').css({'opacity':0});
+			setTimeout(function(){
+				var o=$('#J_prodet_img_wrap').removeClass('fn-hide').addClass('hg-box-animation');
+				$('#J_body').on('touchmove',function(e){
+					e.preventDefault();
+				});
+				document.body.scrollTop=0;
+				document.documentElement.scrollTop=0;
+				o.css({
+					'-webkit-transform':'translate3d(0,45px,0)',
+					'transform':'translate3d(0,45px,0)',
+					opacity:1
+				});
+				setTimeout(function(){
+					$('#J_body').unbind('touchmove');
+					o.removeClass('hg-box-animation');
+					$('#J_prodet_headtab li:eq(1)').addClass('cur').siblings().removeClass('cur');
+					window.prodetScope.runingFlag=false;
+				},350);
+			},350);
+		}
+		function hideDetail(){
+			if(window.prodetScope.runingFlag)return;
+			window.prodetScope.runingFlag=true;
+			document.body.scrollTop=0;
+			document.documentElement.scrollTop=0;
+			var o=$('#J_prodet_img_wrap').addClass('hg-box-animation');
+			$('#J_body').on('touchmove',function(e){
+				e.preventDefault();
+			});
+			var h=$(window).height()*0.6;
+			o.css({
+				'-webkit-transform':'translate3d(0,'+(45+h)+'px,0)',
+				'transform':'translate3d(0,'+(45+h)+'px,0)',
+				opacity:0.1
+			});
+			setTimeout(function(){
+				$('#J_body').unbind('touchmove');
+				o.removeClass('hg-box-animation').addClass('fn-hide');
+				window.prodetScope.runingFlag=false;
+				$('#J_prodet_product').css({'opacity':1});
+				$('#J_prodet_headtab li:eq(0)').addClass('cur').siblings().removeClass('cur');
+			},350);
+		}
+	</script>
+</body>
+</html>

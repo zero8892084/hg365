@@ -1,0 +1,44 @@
+{
+    "code": 0,
+    "msg":"",
+    "bean": {
+	    "id":"10010",
+    	"name":"三星Galaxy 银河手机双曲面无边框",
+    	"desc":"三星2000年最新款手机，2.4G内存I5CPU，想你不敢想象",
+    	"price":"120300",
+    	"taxId":"1002932",
+    	"taxRate":"32",
+    	"spec":[
+    		{
+    			"type":"尺寸",
+    			"id":"123",
+    			"items":[
+    				{
+    					"label":"4.5",
+    					"id":"1"
+    				},
+                    {
+                        "label":"5.5",
+                        "id":"2"
+                    }
+    			]
+    		},
+            {
+                "type":"重量",
+                "id":"124",
+                "items":[
+                    {
+                        "label":"4.5克",
+                        "id":"1"
+                    }
+                ]
+            }
+    	],
+    	"imgs":[
+            "http://132.37.4.175:8080/storageserver/image/5661560ce2e0e3290a29af52.jpg",
+            "http://132.37.4.175:8080/storageserver/image/5661570ee2e0e3290a29af58.jpg",
+            "../../test/1.png",
+            "../../test/2.png"
+        ]
+    }
+}
