@@ -1,0 +1,78 @@
+{
+    "code": 0,
+    "message":"",
+    "beans": [
+    	{
+    		"storeName":"店铺名称",
+    		"storeId":"1233",
+    		"normal":[
+    			{
+    				"id":"10010",
+    				"name":"三星Galaxy 银河手机双曲面无边框",
+    				"price":"120300",
+    				"img":"../../test/7.png",
+    				"number":"4",
+    				"spec":"基佬粉,S"
+    			}
+    		],
+    		"cross":[
+    			{
+    				"id":"10011",
+    				"name":"三星Galaxy 银河手机双曲面无边框",
+    				"price":"120300",
+    				"img":"../../test/8.png",
+    				"number":"2",
+    				"taxId":"1002932",
+    				"taxRate":"28",
+    				"spec":"175XL,七分休闲,这是比较长的属性"
+    			},
+                {
+                    "id":"10012",
+                    "name":"三星Galaxy 银河手机双曲面无边框",
+                    "price":"120300",
+                    "img":"../../test/8.png",
+                    "number":"2",
+                    "taxId":"1002932",
+                    "taxRate":"32",
+                    "spec":"175XL,七分休闲"
+                }
+    		]
+    	},
+        {
+            "storeName":"店铺名称",
+            "storeId":"1234",
+            "normal":[
+                {
+                    "id":"10010",
+                    "name":"三星Galaxy 银河手机双曲面无边框",
+                    "price":"120300",
+                    "img":"../../test/7.png",
+                    "number":"4",
+                    "spec":"基佬粉,S"
+                }
+            ],
+            "cross":[
+                {
+                    "id":"10021",
+                    "name":"三星Galaxy 银河手机双曲面无边框",
+                    "price":"120300",
+                    "img":"../../test/8.png",
+                    "number":"2",
+                    "taxId":"1002932",
+                    "taxRate":"32",
+                    "spec":"175XL,七分休闲"
+                },
+                {
+                    "id":"10022",
+                    "name":"三星Galaxy 银河手机双曲面无边框",
+                    "price":"120300",
+                    "img":"../../test/8.png",
+                    "number":"2",
+                    "taxId":"1002932",
+                    "taxRate":"32",
+                    "spec":"175XL,七分休闲"
+                }
+            ]
+        }
+    ]
+}

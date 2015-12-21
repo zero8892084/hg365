@@ -1,52 +1,3 @@
-/*滚动监听封装*/
-;(function($,window){
-    function ScrollControl(){
-        this.register=[];
-        var _th=this;
-        var w=$(window);
-        var d=$(document);
-        var bottomOffset=20;
-        var pointerOffset=50;
-        var last=0;
-        w.on('scroll',function(){
-            var top=w.scrollTop();
-            //isDown是true的时候，说明向下滑动，isDown为false时，向下滑动
-            var isDown=(top-last)>0;
-            last=top;
-            var vwHeight=w.height();
-            var dcHeight=d.height();
-            //触发到达底部事件
-            if(top+vwHeight+bottomOffset>dcHeight){
-                w.trigger(hg.event.SCROLL_BOTTOM);
-            }
-            //判断是否触发注册的点的事件
-            for(var i = 0; i<_th.register.length;i++){
-                var o=_th.register[i];
-                if(top+pointerOffset<o.offset&&top+vwHeight-pointerOffset>o.offset){
-                    w.trigger(o.name,{
-                        direction:isDown
-                    });
-                }
-            }
-        });
-    }
-
-    ScrollControl.prototype.regist=function(obj,eventName){
-        var offset=$(obj).offset().top;
-        var index=this.register.length;
-        for(var i=0 ;i<this.register.length; i++){
-            var o = this.register[i];
-            if(o.offset>offset){
-                index=i;
-                break;
-            }
-        }
-        this.register.splice(index,0,{offset:offset,name:eventName,ele:obj});
-        return this;
-    }
-    window.ScrollControl=ScrollControl;
-})(jQuery,window);
-
 ;(function($){
     /*
         handlebars扩展
@@ -392,7 +343,7 @@
         "floatNum":new RegExp('^\\d+(\\.\\d{1,2})?$','g'),
         "Chinese":/[\u4E00-\u9FFF]/g
     }
-    hg.event={};
+    hg.event=new ZEvent();
     hg.event.SCROLL_BOTTOM='scroll_bottom';
 
     hg.data=function(cfg){
@@ -440,6 +391,17 @@
             },170);
         },time);
     }
+    hg.object=function(obj){
+        function A(){}
+        A.prototype = obj;
+        var o = new A();
+        return o;
+    }
+    hg.inheritPrototype=function(Sub,Super){
+        var prototype = hg.object(Super.prototype);//创建对象  
+        prototype.constructor = Sub;//增强对象  
+        Sub.prototype = prototype;//自定对象
+    }
 
     //去掉字符串头尾空格
     String.prototype.trim = function()
@@ -447,9 +409,60 @@
         return this.replace(/(^\s*)|(\s*$)/g,"");
     }
 
-    hg.scrollCtr=new ScrollControl();
     window.hg=hg;
 })(jQuery);
+
+/*滚动监听封装*/
+;(function($,window){
+    function ScrollControl(){
+        this.register=[];
+        var _th=this;
+        var w=$(window);
+        var d=$(document);
+        var bottomOffset=20;
+        var pointerOffset=50;
+        var last=0;
+        w.on('scroll',function(){
+            var top=w.scrollTop();
+            //isDown是true的时候，说明向下滑动，isDown为false时，向下滑动
+            var isDown=(top-last)>0;
+            last=top;
+            var vwHeight=w.height();
+            var dcHeight=d.height();
+            //触发到达底部事件
+            if(top+vwHeight+bottomOffset>dcHeight){
+                hg.event.trigger(hg.event.SCROLL_BOTTOM);
+            }
+            //判断是否触发注册的点的事件
+            for(var i = 0; i<_th.register.length;i++){
+                var o=_th.register[i];
+                if(top+pointerOffset<o.offset&&top+vwHeight-pointerOffset>o.offset){
+                    hg.event.trigger(o.name,{
+                        direction:isDown
+                    });
+                }
+            }
+        });
+    }
+
+    ScrollControl.prototype.regist=function(obj,eventName){
+        var offset=$(obj).offset().top;
+        var index=this.register.length;
+        for(var i=0 ;i<this.register.length; i++){
+            var o = this.register[i];
+            if(o.offset>offset){
+                index=i;
+                break;
+            }
+        }
+        this.register.splice(index,0,{offset:offset,name:eventName,ele:obj});
+        return this;
+    }
+    window.ScrollControl=ScrollControl;
+
+
+    hg.scrollCtr=new ScrollControl();
+})(jQuery,window);
 
 /*发送短信*/
 ;(function($){

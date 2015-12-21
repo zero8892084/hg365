@@ -30,7 +30,6 @@
 		var couter=getCounter(id);
 		if(!couter)return;
 		var val=$(this).val();
-
 		couter.set(val);
 	});
 
@@ -58,7 +57,9 @@
 
 	Counter.prototype.init=function(){
 		var ele=$(this.cfg.ele);
-		ele.find('input').val(this.value);
+		if(this.value){
+			ele.find('input').val();
+		}
 		var id=mkId();
 		ele.data('id',id);
 		setCounter(id,this);
@@ -94,7 +95,7 @@
 		ele.find('input').val(value);
 		this.value=value;
 		if(this.cfg.callback){
-			this.cfg.callback.call(this,value);
+			this.cfg.callback.call(this,value,this.cfg.ele);
 		}
 	}
 

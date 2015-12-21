@@ -21,13 +21,11 @@ app.all("/module/*",function(req,res){
 
 app.post("/upload",function(req,res){
 	var form = new multiparty.Form({uploadDir: 'res/test/upload/'});
-	console.log('--------------------------------------------');
 	form.parse(req, function(err, fields, files) {
 	    var filesTmp = JSON.stringify(files,null,2);
 	    if(err){
 	      console.log('parse error: ' + err);
 	     } else {
-	       console.log('parse files: ' + filesTmp);
 	       var inputFile = files.Filedata[0];
 	       var uploadedPath = inputFile.path;
 	       var dstPath = 'res/test/upload/' + inputFile.originalFilename;
@@ -48,12 +46,12 @@ app.post("/upload",function(req,res){
 
 app.use(express.static(path.join(__dirname,'res')));
 
-app.listen('8080','192.168.155.1',function(){
-	console.log('listen 192.168.155.1:8080');
+app.listen('8080','192.168.1.104',function(){
+	console.log('listen 192.168.1.104:8080');
 });
-/*app.listen('8080','localhost',function(){
+app.listen('8080','localhost',function(){
 	console.log('listen localhost:8080');
-});*/
+});
 
 
 

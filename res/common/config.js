@@ -28,6 +28,10 @@
             repwd:{//重置密码
                   static:"../../data/login/sendMessage.json",
                   remote:baseUrl+""
+            },
+            shopCar:{//获取购物车列表
+                  static:"../../data/user/shopCar.json",
+                  remote:baseUrl+""
             }
       }
       
