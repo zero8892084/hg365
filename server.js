@@ -2,7 +2,7 @@ var express = require('express'),
 	path = require('path'),
 	ejs = require('ejs'),
 	util = require('util'),
-	multiparty = require('multiparty')
+	multiparty = require('multiparty'),
 	fs = require('fs');
 
 var app = module.exports = express();
@@ -46,8 +46,8 @@ app.post("/upload",function(req,res){
 
 app.use(express.static(path.join(__dirname,'res')));
 
-app.listen('8080','192.168.1.104',function(){
-	console.log('listen 192.168.1.104:8080');
+app.listen('8080','192.168.155.1',function(){
+	console.log('listen 192.168.155.1:8080');
 });
 app.listen('8080','localhost',function(){
 	console.log('listen localhost:8080');

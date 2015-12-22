@@ -13,7 +13,7 @@
 	}
 
 
-	$('#J_content').on('touchend','.hg-counter i',function(){
+	$('#J_content').on('touchstart','.hg-counter i',function(e){
 		var p=$(this).parent('.hg-counter');
 		var id=p.data('id');
 		var couter=getCounter(id);
@@ -23,6 +23,7 @@
 		}else{
 			couter.reduce();
 		}
+		e.preventDefault();
 	});
 	$('#J_content').on('blur','.hg-counter input',function(){
 		var p=$(this).parent('.hg-counter');

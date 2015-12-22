@@ -32,6 +32,10 @@
             shopCar:{//获取购物车列表
                   static:"../../data/user/shopCar.json",
                   remote:baseUrl+""
+            },
+            shopCarInvalid:{//验证购物车中的项是否失效
+                  static:"../../data/user/isInvalid.json",
+                  remote:baseUrl+""
             }
       }
       

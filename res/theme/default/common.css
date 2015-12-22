@@ -84,6 +84,10 @@ a{
 	color:#999999;
 	vertical-align: middle;
 }
+.hg-warn{
+	font-size: 14px;
+	color:#FF868C;
+}
 .hg-text-price{
 	font-size: 14px;
 	color:#E3010D;
@@ -149,7 +153,7 @@ a{
 }
 .hg-counter i{
 	display: inline-block;
-	width:.7rem;
+	width:.8rem;
 	height:.7rem;
 	line-height: .7rem;
 	text-align:center;
@@ -335,6 +339,9 @@ a{
 }
 .hg-iconfont-rarrow:before{
 	content:'\e616';
+}
+.hg-iconfont-warn:before{
+	content:'\e602';
 }
 /*iconfont end*/
 
