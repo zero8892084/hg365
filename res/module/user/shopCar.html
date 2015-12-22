@@ -243,12 +243,14 @@
 			o.find('.J_shopcar_taxtotal').html('￥'+storeCount.taxTotal/100);
 			o.find('.J_shopcar_total').html('￥'+(proTotal+storeCount.taxTotal)/100);
 			o.find('.J_shopcar_num').html(storeCount.normalNum+storeCount.crossNum);
+
+			var wran=o.find('.shopcar-warn');
 			if(storeCount.crossNum==1){
-				
+				wran.addClass('fn-hide');
 			}else{
-				var wran=o.find('.shopcar-warn');
-				if(storeCount.taxTotal>100000){
-					wran.removeClass('fn-hide').find('.shopcar-warn-text').html('您在本店铺已经购买超过1000元的商品。海关规定当购买多个商品时，订单的总额不能大于1000元。');
+				
+				if(storeCount.crossTotal>100000){
+					wran.removeClass('fn-hide').find('.shopcar-warn-text').html('海关规定在同一个店铺购买多件商品时，跨境的总额不能大于1000元。');
 				}else{
 					wran.addClass('fn-hide');
 				}

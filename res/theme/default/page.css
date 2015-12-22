@@ -481,8 +481,8 @@ body .fn-hide-vb{
     border-radius: .06rem;
 }
 .shopcar-warn{
-    border:1px solid #FF868C;
-    padding:.1rem .15rem;
+    background-color: #FFF8DA;
+    padding:.2rem .2rem;
     width:85%;
     margin:.2rem auto 0 auto;
     border-radius: .1rem;
@@ -494,10 +494,11 @@ body .fn-hide-vb{
     font-size: 14px;
 }
 .shopcar-warn .hg-iconfont-warn{
-    color:#FF868C;
+    color:#D22147;
     display: inline-block;
     float: left;
-    margin-top:-0.04rem;
+    margin-top:.04rem;
+    font-size: 16px;
 }
 /*shopcar.html end*/
 

@@ -86,7 +86,7 @@ a{
 }
 .hg-warn{
 	font-size: 14px;
-	color:#FF868C;
+	color:#D22147;
 }
 .hg-text-price{
 	font-size: 14px;
@@ -341,7 +341,7 @@ a{
 	content:'\e616';
 }
 .hg-iconfont-warn:before{
-	content:'\e602';
+	content:'\e61a';
 }
 /*iconfont end*/
 
