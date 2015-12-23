@@ -3,8 +3,54 @@
     "message":"",
     "beans": [
     	{
-    		"proId":"商品id",
-    		"isInvalid":"是否失效"
+    		"storeId":"店铺ID",
+    		"storeName":"店铺名称",
+    		"normal":[
+    			{
+    				"express":[
+	    				{
+	    					"id":"",
+	    					"name":"",
+	    					"price":""
+	    				}
+    				],
+    				"products":[
+    					{
+    						"id":"",
+    						"price":"",
+    						"name":"",
+    						"type":"规格",
+    						"number":"",
+    						"inventory":"",
+    						"img":""
+    					}
+    				]
+    			}
+    		],
+    		"cross":[
+    			{
+    				"express":[
+	    				{
+	    					"id":"",
+	    					"name":"",
+	    					"price":""
+	    				}
+    				],
+    				"products":[
+    					{
+    						"id":"",
+    						"price":"",
+    						"name":"",
+    						"type":"规格",
+    						"number":"",
+    						"inventory":"",
+    						"img":"",
+    						"taxRate":"",
+    						"taxId":""
+    					}
+    				]
+    			}
+    		]
     	}
     ]
 }

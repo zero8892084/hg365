@@ -8,12 +8,12 @@
 	<div id="J_content" class="hg-content">
 		<% include ../include/head.html %>
 		<div id="J_body" class="hg-body hg-box-bt">
-			<ul class="shopcar-store" id="J_shopcar">
+			<ul class="hg-store" id="J_shopcar">
 
 			</ul>
 			<div class="hg-box-foot shopcar-foot" id="">
 				<div class="shopcar-foot-all" id="J_shopcar_select_all">
-					<span class="shopcar-store-check"></span>
+					<span class="hg-store-check"></span>
 					<span class="hg-text">全选</span>
 				</div>
 				<div class="shopcar-foot-info">
@@ -39,20 +39,20 @@
 	<textarea class="fn-hide" id="T_shopcar">
 		{{#each this}}
 		<li data-storeid="{{storeId}}">
-			<div class="hg-text shopcar-store-title">
-				<span class="shopcar-store-check J_shopcar_store_check" data-storeid="{{storeId}}"></span>
+			<div class="hg-text hg-store-title">
+				<span class="hg-store-check J_shopcar_store_check" data-storeid="{{storeId}}"></span>
 				<span class="hg-iconfont hg-iconfont-store"></span>
 				<span>{{storeName}}</span>
 				<span class="hg-iconfont hg-iconfont-rarrow fn-right"></span>
 			</div>
-			<div class="shopcar-store-content">
-				<div class="hg-text shopcar-store-type"><span class="hg-iconfont hg-iconfont-in"></span>一般商品</div>
-				<ul class="shopcar-prolist">
+			<div class="hg-store-content">
+				<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-in"></span>一般商品</div>
+				<ul class="hg-prolist">
 					{{#each normal}}
 					<li class="fn-clear">
-						<span class="shopcar-store-check" data-storeid="{{../storeId}}" data-proid="{{id}}"></span>
+						<span class="hg-store-check" data-storeid="{{../storeId}}" data-proid="{{id}}"></span>
 						<img src="{{img}}">
-						<div class="shopcar-prolist-info">
+						<div class="hg-prolist-info">
 							<h4 class="hg-text">{{name}}</h4>
 							<p class="hg-desc">
 								{{spec}}
@@ -64,26 +64,26 @@
 								<i class="add">+</i>
 							</div>
 						</div>
-						<div class="shopcar-mask">
-							<span class="shopcar-mask-text">失效</span>
+						<div class="hg-prolist-mask">
+							<span class="hg-prolist-mask-text">失效</span>
 						</div>
 					</li>
 					{{/each}}
 				</ul>
-				<div class="hg-text shopcar-store-type"><span class="hg-iconfont hg-iconfont-sea"></span>跨境商品</div>
-				<ul class="shopcar-prolist ">
+				<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-sea"></span>跨境商品</div>
+				<ul class="hg-prolist ">
 					{{#each cross}}
 					<li class="fn-clear">
-						<span class="shopcar-store-check"  data-storeid="{{../storeId}}" data-proid="{{id}}"></span>
+						<span class="hg-store-check"  data-storeid="{{../storeId}}" data-proid="{{id}}"></span>
 						<img src="{{img}}">
-						<div class="shopcar-prolist-info">
+						<div class="hg-prolist-info">
 							<h4 class="hg-text">{{name}}</h4>
 							<p class="hg-desc">
 								{{spec}}
 							</p>
 							<div class="">
 								<span class="hg-text-price">￥{{divide100 price}}</span>
-								<span class="shopcar-prolist-tax">税率{{taxRate}}%</span>
+								<span class="hg-prolist-tax">税率{{taxRate}}%</span>
 							</div>
 							<div class="hg-counter" data-proid="{{id}}" data-storeid="{{../storeId}}">
 								<i class="reduce">-</i>
@@ -91,14 +91,14 @@
 								<i class="add">+</i>
 							</div>
 						</div>
-						<div class="shopcar-mask">
-							<span class="shopcar-mask-text">失效</span>
+						<div class="hg-prolist-mask">
+							<span class="hg-prolist-mask-text">失效</span>
 						</div>
 					</li>
 					{{/each}}
 				</ul>
 			</div>
-			<div class="shopcar-total fn-clear">
+			<div class="hg-store-total fn-clear">
 				<div class="fn-clear">
 					<div class="fn-left hg-text">已选择<span class="J_shopcar_num"></span>件商品</div>
 					<dl class="fn-right">
@@ -106,14 +106,14 @@
 						<dd class="J_shopcar_prototal"></dd>
 						<dt>跨境关税:</dt>
 						<dd class="J_shopcar_taxtotal"></dd>
-						<dt class="shopcar-total-label">店铺小计:</dt>
+						<dt class="hg-store-total-label">店铺小计:</dt>
 						<dd class="hg-text-price J_shopcar_total"></dd>
-						<dt class="shopcar-total-desc">(不含运费)</dt>
+						<dt class="hg-store-total-desc">(不含运费)</dt>
 					</dl>
 				</div>
-				<div class="hg-warn shopcar-warn fn-clear fn-hide">
+				<div class="hg-warn hg-warn fn-clear fn-hide">
 					<span class="hg-iconfont hg-iconfont-warn"></span>
-					<span class="shopcar-warn-text">
+					<span class="hg-warn-text">
 						-
 					</span>
 				</div>
@@ -152,12 +152,12 @@
 				});
 			});
 			//注册选择按钮
-			$('#J_shopcar').on('touchstart','.shopcar-store-check',function(){
+			$('#J_shopcar').on('touchstart','.hg-store-check',function(){
 				var ele=$(this);
 				var proId=ele.data('proid');
 				var storeId=ele.data('storeid');
 				//如果当前触摸的按钮有选中样式，则去掉选中，未选中则置为选中
-				var flag=ele.hasClass('shopcar-store-checked');
+				var flag=ele.hasClass('hg-store-checked');
 				//单选，改变数据对象的状态
 				//当proId为空时，说明更新整个店铺下的单选按钮
 				window.shopCarSC.data.set(storeId,proId,{
@@ -167,12 +167,12 @@
 
 			//整页全选
 			$('#J_shopcar_select_all').on('touchstart',function(){
-				var ele=$(this).find('.shopcar-store-check');
-				var flag=ele.hasClass('shopcar-store-checked');
+				var ele=$(this).find('.hg-store-check');
+				var flag=ele.hasClass('hg-store-checked');
 				if(flag){
-					ele.removeClass('shopcar-store-checked');
+					ele.removeClass('hg-store-checked');
 				}else{
-					ele.addClass('shopcar-store-checked');
+					ele.addClass('hg-store-checked');
 				}
 				window.shopCarSC.data.setAllCheck(!flag);
 			});
@@ -189,14 +189,14 @@
 					updateCheck(e.ids[i],e.flag);
 				}
 				var store=$('#J_shopcar .J_shopcar_store_check[data-storeid="'+e.storeId+'"]');
-				var cla='shopcar-store-checked';
+				var cla='hg-store-checked';
 				if(e.storeAll){
 					store.addClass(cla);
 				}else{
 					store.removeClass(cla);
 				}
 
-				var all=$('#J_shopcar_select_all .shopcar-store-check');			
+				var all=$('#J_shopcar_select_all .hg-store-check');			
 				if(e.all){
 					all.addClass(cla);
 				}else{
@@ -244,13 +244,13 @@
 			o.find('.J_shopcar_total').html('￥'+(proTotal+storeCount.taxTotal)/100);
 			o.find('.J_shopcar_num').html(storeCount.normalNum+storeCount.crossNum);
 
-			var wran=o.find('.shopcar-warn');
+			var wran=o.find('.hg-warn');
 			if(storeCount.crossNum==1){
 				wran.addClass('fn-hide');
 			}else{
 				
 				if(storeCount.crossTotal>100000){
-					wran.removeClass('fn-hide').find('.shopcar-warn-text').html('海关规定在同一个店铺购买多件商品时，跨境的总额不能大于1000元。');
+					wran.removeClass('fn-hide').find('.hg-warn-text').html('海关规定在同一个店铺购买多件商品时，跨境的总额不能大于1000元。');
 				}else{
 					wran.addClass('fn-hide');
 				}
@@ -266,20 +266,20 @@
 		}
 
 		function updateCheck(id,flag){
-			var ele=$('#J_shopcar .shopcar-store-check[data-proid="'+id+'"]');
+			var ele=$('#J_shopcar .hg-store-check[data-proid="'+id+'"]');
 			if(flag){
-				ele.addClass('shopcar-store-checked');
+				ele.addClass('hg-store-checked');
 			}else{
-				ele.removeClass('shopcar-store-checked');
+				ele.removeClass('hg-store-checked');
 			}
 		}
 
 		function updateInvalid(id,flag){
-			var ele=$('#J_shopcar .shopcar-store-check[data-proid="'+id+'"]').parent();
+			var ele=$('#J_shopcar .hg-store-check[data-proid="'+id+'"]').parent();
 			if(flag){
-				ele.removeClass('shopcar-prolist-disabled');	
+				ele.removeClass('hg-prolist-disabled');	
 			}else{
-				ele.addClass('shopcar-prolist-disabled');	
+				ele.addClass('hg-prolist-disabled');	
 			}
 		}
 	});
@@ -388,9 +388,13 @@
 						}
 					}
 				}
-				storeAll=storeAll&&o.check;
+				if(o.canCheck){
+					storeAll=storeAll&&o.check;
+				}
 			}
-			all=all&&o.check;
+			if(o.canCheck){
+				all=all&&o.check;
+			}
 		}
 		if(obj.hasOwnProperty('check')){
 			this.trigger({

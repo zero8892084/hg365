@@ -316,6 +316,9 @@ a{
 .hg-iconfont-user:before{
 	content:'\e609';
 }
+.hg-iconfont-ouser:before{
+	content:'\e60a';
+}
 .hg-iconfont-pwd:before{
 	content:'\e60d';
 }
@@ -343,6 +346,230 @@ a{
 .hg-iconfont-warn:before{
 	content:'\e61a';
 }
+.hg-iconfont-phone:before{
+	content:'\e61b';
+}
+.hg-iconfont-idcard:before{
+	content:'\e61c';
+}
+.hg-iconfont-address:before{
+	content:'\e61d';
+}
 /*iconfont end*/
 
+/*store product list start*/
+.hg-store{
+    margin:0;
+    padding: 0;
+
+    margin-top:.17rem;
+}
+.hg-store-title{
+    padding: .3rem .1rem;
+    text-align: center;
+    font-size: 16px;
+    border-bottom:1px solid #F0F0F0;
+}
+.hg-store-content{
+    padding:0 .1rem;
+}
+.hg-store>li{
+    background-color: #FFF;
+    list-style: none;
+    border-top:1px solid #E1E1E1;
+    border-bottom:1px solid #E1E1E1;
+    margin-bottom:.2rem;
+}
+.hg-store .hg-iconfont-store,
+.hg-store .hg-iconfont-sea,
+.hg-store .hg-iconfont-in{
+    color:#E3010D;
+}
+.hg-store .hg-iconfont-store:before{
+    vertical-align: text-bottom;
+}
+.hg-store .hg-iconfont-sea,
+.hg-store .hg-iconfont-in{
+    font-size:17px;
+    padding-right:.1rem;
+}
+.hg-store-check{
+    display: inline-block;
+    height:.45rem;
+    width:.45rem;
+    vertical-align: middle;
+    margin-right:.1rem;
+    float: left;
+    margin-top: .02rem;
+    font-family: 'iconfont';
+    font-size: 25px;
+    line-height: .35rem;
+}
+.hg-store-check:after{
+    color:#B2B3B6;
+    content:'\e619';
+    display: inline-block;
+}
+.hg-store-checked:after{
+    /*border:1px solid #FFFFFF;*/
+    color:#E3010D;
+    content: '\e618';
+}
+
+.hg-store-type{
+    padding:.2rem 0 .2rem 0rem;
+    /*background-color: #f0f0f0;*/
+    border-bottom:1px solid #f0f0f0;
+}
+.hg-prolist{
+    padding:0;
+    margin:0;
+}
+.hg-prolist li{
+    list-style:none;
+    padding:.21rem 0rem;
+    background-color: #FFFFFF;
+    border-bottom:1px solid #f0f0f0;
+    position:relative;
+}
+.hg-prolist .hg-store-check{
+    float: left;
+    margin-top:.76rem;
+}
+/*.hg-prolist-check-wrap{
+    height:3rem;
+    float: left;
+    width: .50rem;
+}*/
+.hg-prolist-check-wrap .hg-store-check{
+    display: inline-block;
+    margin-top:.75rem;
+}
+.hg-prolist img{
+    width:1.85rem;
+    height:2.05rem;
+    border:1px solid #ECECEC;
+}
+.hg-prolist-info{
+    float: right;
+    width:3.6rem;
+}
+.hg-prolist-info h4{
+    margin: 0;
+    padding:0;
+    font-weight: normal;
+    height:.44rem;
+    width:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.hg-prolist-info .hg-desc{
+    font-size: 13px; 
+    height:.6rem;
+    display: block;
+}
+.hg-prolist-info .hg-text-price{
+    margin:0;
+}
+.hg-prolist-info .hg-counter{
+    margin-top:0.05rem;
+}
+.hg-prolist-info i,.hg-prolist-info input{
+    height:.65rem;
+    width:.75rem;
+    line-height: .65rem;
+}
+.hg-prolist-info input{
+    width:.85rem;
+}
+.hg-prolist-tax{
+    float: right;
+    margin-top: .08rem;
+    color:#999999;
+    font-size: 14px;
+}
+.hg-prolist-disabled .hg-prolist-mask{
+    display: block;
+}
+.hg-prolist-mask{
+    height:100%;
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    background-color: rgba(236,236,236,.5);
+    display: none;
+}
+.hg-prolist-mask-text{
+    font-size: 12px;
+    display: inline-block;
+    color:#929292;
+    border:1px solid #B7B7B7;
+    padding:.06rem .1rem;
+    width:.23rem;
+    text-align: center;
+    margin-top:.85rem;
+    margin-left:.03rem;
+    background-color: #F1F1F1;
+    border-radius: .06rem;
+}
+.hg-warn{
+    background-color: #FFF8DA;
+    padding:.2rem .2rem;
+    width:85%;
+    margin:.2rem auto 0 auto;
+    border-radius: .1rem;
+}
+.hg-warn-text{
+    width:4.7rem;
+    float: right;
+    line-height: .39rem;
+    font-size: 14px;
+}
+.hg-warn .hg-iconfont-warn{
+    color:#D22147;
+    display: inline-block;
+    float: left;
+    margin-top:.04rem;
+    font-size: 16px;
+}
+.hg-store-total{
+    padding:.2rem;
+    /*background-color: #f0f0f0;*/
+}
+.hg-store-total .hg-text-price{
+    font-size: 16px;
+}
+.hg-store-total dl{
+    margin:0;
+    padding:0;
+    width:3.7rem;
+    float: right;
+    font-size: 14px;
+    color:#999999;
+}
+.hg-store-total dt{
+    display: inline-block;
+    width:1.6rem;
+    text-align: right;
+    margin-bottom:.05rem;
+}
+.hg-store-total dd{
+    display: inline-block;
+    margin:0;
+    text-align: right;
+    width: 2rem;
+}
+.hg-store-total .hg-store-total-label{
+    color:#666666;
+    margin-top:0rem;
+    vertical-align: bottom;
+}
+.hg-store-total-desc{
+    color:#999999;
+    float: right;
+    font-size: 12px;
+}
+/*store product list end*/
 

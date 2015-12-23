@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>确认订单</title>
+<% include ../include/res.html %>
+</head>
+<body>
+	<div id="J_content" class="hg-content">
+		<% include ../include/head.html %>
+		<div id="J_body" class="hg-body">
+			<div class="settle-address">
+				<div class="settle-address-arrow hg-iconfont hg-iconfont-rarrow fn-right"></div>
+				<p class="">
+					<span class="hg-text">
+						<span class="hg-iconfont hg-iconfont-ouser"></span> 李德利
+					</span>
+					<span class="hg-text settle-address-phone fn-right">
+						<span class="hg-iconfont hg-iconfont-phone"></span> 134****2455
+					</span>
+				</p>
+				<p class="">
+					<span class="hg-text">
+						<span class="hg-iconfont hg-iconfont-idcard"></span> 4511**********0333
+					</span>
+				</p>
+				<p class="">
+					<span class="hg-text">
+						<span class="hg-iconfont hg-iconfont-address"></span>
+						<span class="settle-address-detail">广西南宁市青秀区科德路18号高新园A座18号</span>
+					</span>
+				</p>
+			</div>
+
+			<ul class="hg-store settle-store">
+				<li>
+					<div class="hg-text hg-store-title">
+						<span class="hg-iconfont hg-iconfont-store"></span>
+						<span>店铺的名字</span>
+					</div>
+					<div class="hg-store-content">
+						<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-in"></span>一般商品</div>
+						<ul class="hg-prolist">
+							<li class="fn-clear">
+								<img src="../../test/1.png">
+								<div class="hg-prolist-info">
+									<h4 class="hg-text">这个是商品名字人人都是产品经理</h4>
+									<p class="hg-desc">
+										纪念版 全彩
+									</p>
+									<p class="hg-text-price">￥19820</p>
+								</div>
+							</li>
+						</ul>
+						<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-sea"></span>跨境商品</div>
+						<ul class="hg-prolist ">
+							<li class="fn-clear">
+								<img src="../../test/8.png">
+								<div class="hg-prolist-info">
+									<h4 class="hg-text">每一个人都是街王者</h4>
+									<p class="hg-desc">
+										5寸，高粱数据
+									</p>
+									<div class="">
+										<span class="hg-text-price">￥19822</span>
+										<span class="hg-prolist-tax">税率23%</span>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="hg-store-total fn-clear">
+						<div class="fn-clear">
+							<div class="fn-left hg-text">已选择<span class="J_shopcar_num"></span>件商品</div>
+							<dl class="fn-right">
+								<dt>商品总额:</dt>
+								<dd class="J_shopcar_prototal"></dd>
+								<dt>跨境关税:</dt>
+								<dd class="J_shopcar_taxtotal"></dd>
+								<dt class="hg-store-total-label">店铺小计:</dt>
+								<dd class="hg-text-price J_shopcar_total"></dd>
+								<dt class="hg-store-total-desc">(不含运费)</dt>
+							</dl>
+						</div>
+						<div class="hg-warn hg-warn fn-clear fn-hide">
+							<span class="hg-iconfont hg-iconfont-warn"></span>
+							<span class="hg-warn-text">
+								-
+							</span>
+						</div>
+					</div>
+				</li>				
+			</ul>
+		</div>
+		<% include ../include/foot.html %>
+	</div>
+	<% include ../include/js.html %>
+	<script type="text/javascript">
+	$('#J_head_title').html('确认订单');
+	</script>
+</body>
+</html>

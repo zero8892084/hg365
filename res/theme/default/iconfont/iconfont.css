@@ -15,6 +15,7 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-yonghu:before { content: "\e60a"; }
 .icon-arrowleft:before { content: "\e614"; }
 .icon-arrowtop:before { content: "\e615"; }
 .icon-arrowright:before { content: "\e616"; }
@@ -22,6 +23,7 @@
 .icon-shanchu:before { content: "\e611"; }
 .icon-dianpu:before { content: "\e610"; }
 .icon-fasong:before { content: "\e60f"; }
+.icon-dizhi:before { content: "\e61d"; }
 .icon-cartfill:before { content: "\e600"; }
 .icon-cart:before { content: "\e601"; }
 .icon-select:before { content: "\e603"; }
@@ -31,13 +33,13 @@
 .icon-left:before { content: "\e607"; }
 .icon-favfill:before { content: "\e608"; }
 .icon-user:before { content: "\e609"; }
-.icon-myfill:before { content: "\e60a"; }
-.icon-my:before { content: "\e60b"; }
 .icon-message:before { content: "\e60c"; }
 .icon-lock:before { content: "\e60d"; }
 .icon-more:before { content: "\e60e"; }
+.icon-icon:before { content: "\e61b"; }
 .icon-xuanze:before { content: "\e618"; }
 .icon-warn2:before { content: "\e602"; }
+.icon-shenfenzheng:before { content: "\e61c"; }
 .icon-xuanze1:before { content: "\e619"; }
 .icon-jinggao:before { content: "\e61a"; }
 .icon-haitao:before { content: "\e612"; }

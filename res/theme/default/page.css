@@ -232,174 +232,6 @@ body .fn-hide-vb{
 }
 /*shortcut.html end*/
 /*shopcar.html start*/
-.shopcar-store{
-    margin:0;
-    padding: 0;
-
-    margin-top:.17rem;
-}
-.shopcar-store-title{
-    padding: .3rem .1rem;
-    text-align: center;
-    font-size: 16px;
-    border-bottom:1px solid #F0F0F0;
-}
-.shopcar-store-content{
-    padding:0 .1rem;
-}
-.shopcar-store>li{
-    background-color: #FFF;
-    list-style: none;
-    border-top:1px solid #E1E1E1;
-    border-bottom:1px solid #E1E1E1;
-    margin-bottom:.2rem;
-}
-.shopcar-store .hg-iconfont-store,
-.shopcar-store .hg-iconfont-sea,
-.shopcar-store .hg-iconfont-in{
-    color:#E3010D;
-}
-.shopcar-store .hg-iconfont-store:before{
-    vertical-align: text-bottom;
-}
-.shopcar-store .hg-iconfont-sea,
-.shopcar-store .hg-iconfont-in{
-    font-size:17px;
-    padding-right:.1rem;
-}
-.shopcar-store-check{
-    display: inline-block;
-    height:.45rem;
-    width:.45rem;
-    vertical-align: middle;
-    margin-right:.1rem;
-    float: left;
-    margin-top: .02rem;
-    font-family: 'iconfont';
-    font-size: 25px;
-    line-height: .35rem;
-}
-.shopcar-store-check:after{
-    color:#B2B3B6;
-    content:'\e619';
-    display: inline-block;
-}
-.shopcar-store-checked:after{
-    /*border:1px solid #FFFFFF;*/
-    color:#E3010D;
-    content: '\e618';
-}
-
-.shopcar-store-type{
-    padding:.2rem 0 .2rem 0rem;
-    /*background-color: #f0f0f0;*/
-    border-bottom:1px solid #f0f0f0;
-}
-.shopcar-prolist{
-    padding:0;
-    margin:0;
-}
-.shopcar-prolist li{
-    list-style:none;
-    padding:.21rem 0rem;
-    background-color: #FFFFFF;
-    border-bottom:1px solid #f0f0f0;
-    position:relative;
-}
-.shopcar-prolist .shopcar-store-check{
-    float: left;
-    margin-top:.76rem;
-}
-/*.shopcar-prolist-check-wrap{
-    height:3rem;
-    float: left;
-    width: .50rem;
-}*/
-.shopcar-prolist-check-wrap .shopcar-store-check{
-    display: inline-block;
-    margin-top:.75rem;
-}
-.shopcar-prolist img{
-    width:1.85rem;
-    height:2.05rem;
-    border:1px solid #ECECEC;
-}
-.shopcar-prolist-info{
-    float: right;
-    width:3.6rem;
-}
-.shopcar-prolist-info h4{
-    margin: 0;
-    padding:0;
-    font-weight: normal;
-    height:.44rem;
-    width:100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.shopcar-prolist-info .hg-desc{
-    font-size: 13px; 
-    height:.6rem;
-    display: block;
-}
-.shopcar-prolist-info .hg-text-price{
-    margin:0;
-}
-.shopcar-prolist-info .hg-counter{
-    margin-top:0.05rem;
-}
-.shopcar-prolist-info i,.shopcar-prolist-info input{
-    height:.65rem;
-    width:.75rem;
-    line-height: .65rem;
-}
-.shopcar-prolist-info input{
-    width:.85rem;
-}
-.shopcar-prolist-tax{
-    float: right;
-    margin-top: .08rem;
-    color:#999999;
-    font-size: 14px;
-}
-.shopcar-total{
-    padding:.2rem;
-    /*background-color: #f0f0f0;*/
-}
-.shopcar-total .hg-text-price{
-    font-size: 16px;
-}
-.shopcar-total dl{
-    margin:0;
-    padding:0;
-    width:3.7rem;
-    float: right;
-    font-size: 14px;
-    color:#999999;
-}
-.shopcar-total dt{
-    display: inline-block;
-    width:1.6rem;
-    text-align: right;
-    margin-bottom:.05rem;
-}
-.shopcar-total dd{
-    display: inline-block;
-    margin:0;
-    text-align: right;
-    width: 2rem;
-}
-.shopcar-total .shopcar-total-label{
-    color:#666666;
-    margin-top:0rem;
-    vertical-align: bottom;
-}
-.shopcar-total-desc{
-    color:#999999;
-    float: right;
-    font-size: 12px;
-}
 .shopcar-foot{
     height:1.2rem;
 }
@@ -455,54 +287,42 @@ body .fn-hide-vb{
     display: inline-block;
     width:1.80rem;
 }
-.shopcar-prolist-disabled .shopcar-mask{
-    display: block;
-}
-.shopcar-mask{
-    height:100%;
-    width: 100%;
-    position: absolute;
-    top:0;
-    left:0;
-    background-color: rgba(236,236,236,.5);
-    display: none;
-}
-.shopcar-mask-text{
-    font-size: 12px;
-    display: inline-block;
-    color:#929292;
-    border:1px solid #B7B7B7;
-    padding:.06rem .1rem;
-    width:.23rem;
-    text-align: center;
-    margin-top:.85rem;
-    margin-left:.03rem;
-    background-color: #F1F1F1;
-    border-radius: .06rem;
-}
-.shopcar-warn{
-    background-color: #FFF8DA;
-    padding:.2rem .2rem;
-    width:85%;
-    margin:.2rem auto 0 auto;
-    border-radius: .1rem;
-}
-.shopcar-warn-text{
-    width:4.7rem;
-    float: right;
-    line-height: .39rem;
-    font-size: 14px;
-}
-.shopcar-warn .hg-iconfont-warn{
-    color:#D22147;
-    display: inline-block;
-    float: left;
-    margin-top:.04rem;
-    font-size: 16px;
-}
 /*shopcar.html end*/
 
+/*settlement.html start*/
+.settle-address{
+    padding:.2rem;
+    background-color: #FFFAF3;
 
+}
+.settle-address p{
+    margin:0;
+    margin-bottom:.15rem;
+    width:5.5rem;
+}
+.settle-address .hg-iconfont{
+    color:#E3010D;
+}
+.settle-address-phone{
+    /*margin-left:1.2rem;*/
+}
+.settle-address-arrow{
+    margin-top:.7rem;
+}
+.settle-address-detail{
+    font-size: 12px;
+    width:5rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+.settle-store .hg-store-title{
+    padding:.2rem .1rem;
+    text-align: left;
+}
+.settle-store .hg-prolist li{
+    background-color: #F7F7F7;
+}
+/*settlement.html end*/
 
 
 
