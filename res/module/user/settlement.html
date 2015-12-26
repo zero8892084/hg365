@@ -7,95 +7,171 @@
 <body>
 	<div id="J_content" class="hg-content">
 		<% include ../include/head.html %>
-		<div id="J_body" class="hg-body">
-			<div class="settle-address">
-				<div class="settle-address-arrow hg-iconfont hg-iconfont-rarrow fn-right"></div>
-				<p class="">
-					<span class="hg-text">
-						<span class="hg-iconfont hg-iconfont-ouser"></span> 李德利
-					</span>
-					<span class="hg-text settle-address-phone fn-right">
-						<span class="hg-iconfont hg-iconfont-phone"></span> 134****2455
-					</span>
-				</p>
-				<p class="">
-					<span class="hg-text">
-						<span class="hg-iconfont hg-iconfont-idcard"></span> 4511**********0333
-					</span>
-				</p>
-				<p class="">
-					<span class="hg-text">
-						<span class="hg-iconfont hg-iconfont-address"></span>
-						<span class="settle-address-detail">广西南宁市青秀区科德路18号高新园A座18号</span>
-					</span>
-				</p>
+		<div id="J_body" class="hg-body hg-box-bt">
+			<div class="settle-loading" id="J_settle_loading">
+				<span class="hg-loading hg-loading-big"></span>
+				<p class="hg-text">正在帮您计算，请稍候......</p>
 			</div>
-
-			<ul class="hg-store settle-store">
-				<li>
-					<div class="hg-text hg-store-title">
-						<span class="hg-iconfont hg-iconfont-store"></span>
-						<span>店铺的名字</span>
-					</div>
-					<div class="hg-store-content">
-						<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-in"></span>一般商品</div>
-						<ul class="hg-prolist">
-							<li class="fn-clear">
-								<img src="../../test/1.png">
-								<div class="hg-prolist-info">
-									<h4 class="hg-text">这个是商品名字人人都是产品经理</h4>
-									<p class="hg-desc">
-										纪念版 全彩
-									</p>
-									<p class="hg-text-price">￥19820</p>
-								</div>
-							</li>
-						</ul>
-						<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-sea"></span>跨境商品</div>
-						<ul class="hg-prolist ">
-							<li class="fn-clear">
-								<img src="../../test/8.png">
-								<div class="hg-prolist-info">
-									<h4 class="hg-text">每一个人都是街王者</h4>
-									<p class="hg-desc">
-										5寸，高粱数据
-									</p>
-									<div class="">
-										<span class="hg-text-price">￥19822</span>
-										<span class="hg-prolist-tax">税率23%</span>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="hg-store-total fn-clear">
-						<div class="fn-clear">
-							<div class="fn-left hg-text">已选择<span class="J_shopcar_num"></span>件商品</div>
-							<dl class="fn-right">
-								<dt>商品总额:</dt>
-								<dd class="J_shopcar_prototal"></dd>
-								<dt>跨境关税:</dt>
-								<dd class="J_shopcar_taxtotal"></dd>
-								<dt class="hg-store-total-label">店铺小计:</dt>
-								<dd class="hg-text-price J_shopcar_total"></dd>
-								<dt class="hg-store-total-desc">(不含运费)</dt>
-							</dl>
-						</div>
-						<div class="hg-warn hg-warn fn-clear fn-hide">
-							<span class="hg-iconfont hg-iconfont-warn"></span>
-							<span class="hg-warn-text">
-								-
-							</span>
-						</div>
-					</div>
-				</li>				
-			</ul>
+			<div class="fn-hide">
+				<div class="settle-address" id="J_settlement_address">
+				
+				</div>
+				<ul class="hg-store settle-store" id="J_settlement_list">
+					
+				</ul>
+				<div class="hg-box-foot hg-slefoot" id="">
+					<p class="hg-slefoot-submoney">
+						<span class="hg-text">实付款:</span>
+						<span class="hg-text-price">￥88928</span>
+					</p>
+					<span class="hg-btn hg-btn-red fn-right">提交订单</span>
+				</div>
+			</div>
+			
 		</div>
 		<% include ../include/foot.html %>
+		<textarea class="fn-hide" id="T_settlement_list">
+			{{#each this}}
+			<li>
+				<div class="hg-text hg-store-title">
+					<span class="hg-iconfont hg-iconfont-store"></span>
+					<span>{{storeName}}</span>
+				</div>
+				<div class="hg-store-content">
+					<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-in"></span>一般商品</div>
+					{{#each normal}}
+					<ul class="hg-prolist">
+						{{#each products}}
+						<li class="fn-clear">
+							<img src="{{img}}">
+							<div class="hg-prolist-info">
+								<h4 class="hg-text">{{name}}</h4>
+								<p class="hg-desc">
+									{{type}}
+								</p>
+							</div>
+							<div class="hg-store-price">
+								<div class="hg-text-price">￥{{divide100 price}}</div>
+								<p class="hg-desc">x{{number}}</p>
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+					<div class="hg-select">
+						<select>
+							{{#each express}}
+							<option value="{{id}}">{{name}} ￥{{divide100 price}}</option>
+							{{/each}}
+						</select>
+					</div>
+					{{/each}}
+					<div class="hg-text hg-store-type"><span class="hg-iconfont hg-iconfont-sea"></span>跨境商品</div>
+					{{#each cross}}
+					<ul class="hg-prolist">
+						{{#each products}}
+						<li class="fn-clear">
+							<img src="../../test/8.png">
+							<div class="hg-prolist-info">
+								<h4 class="hg-text">{{name}}</h4>
+								<p class="hg-desc">
+									{{type}}
+								</p>
+							</div>
+							<div class="hg-store-price">
+								<div class="hg-text-price">￥{{divide100 price}}</div>
+								<p class="hg-desc">x{{number}}</p>
+								<p class="hg-desc">税率{{taxRate}}%</p>
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+					<div class="hg-select">
+						<select>
+							{{#each express}}
+							<option value="{{id}}">{{name}} ￥{{divide100 price}}</option>
+							{{/each}}
+						</select>
+					</div>
+					{{/each}}
+				</div>
+				<div class="hg-store-total fn-clear">
+					<div class="fn-clear">
+						<div class="fn-left hg-text">共有<span class="J_shopcar_num">3</span>个包裹</div>
+						<dl class="fn-right">
+							<dt>商品总额:</dt>
+							<dd class="J_shopcar_prototal">￥23</dd>
+							<dt>跨境关税:</dt>
+							<dd class="J_shopcar_taxtotal">￥322</dd>
+							<dt>运费:</dt>
+							<dd class="J_shopcar_taxtotal">￥20</dd>
+							<dt class="hg-store-total-label">小计:</dt>
+							<dd class="hg-text-price J_shopcar_total">￥2324</dd>
+						</dl>
+					</div>
+					<div class="hg-warn hg-warn fn-clear fn-hide">
+						<span class="hg-iconfont hg-iconfont-warn"></span>
+						<span class="hg-warn-text">
+							-
+						</span>
+					</div>
+				</div>
+			</li>
+			{{/each}}
+		</textarea>
+		<textarea class="fn-hide" id="T_settlement_address">
+			<div class="settle-address-arrow hg-iconfont hg-iconfont-rarrow fn-right"></div>
+			<p class="">
+				<span class="hg-text">
+					<span class="hg-iconfont hg-iconfont-ouser"></span> {{name}}
+				</span>
+				<span class="hg-text settle-address-phone fn-right">
+					<span class="hg-iconfont hg-iconfont-phone"></span> {{phone}}
+				</span>
+			</p>
+			<p class="">
+				<span class="hg-text">
+					<span class="hg-iconfont hg-iconfont-idcard"></span> {{idcard}}
+				</span>
+			</p>
+			<p class="">
+				<span class="hg-text">
+					<span class="hg-iconfont hg-iconfont-address"></span>
+					<span class="settle-address-detail">{{address}}</span>
+				</span>
+			</p>
+		</textarea>
 	</div>
 	<% include ../include/js.html %>
 	<script type="text/javascript">
 	$('#J_head_title').html('确认订单');
+	$(function(){
+		hg.data({
+			url:cfg.get('address')
+		}).done(function(json){
+			for(var i=0;i<json.beans.length;i++){
+				if(json.beans[i].isDefault){
+					$('#J_settlement_address').temp($('#T_settlement_address'),json.beans[i]);
+					break;
+				}
+			}
+			hg.data({
+				url:cfg.get('settlement'),
+				data:''
+			}).done(function(json){
+				$('#J_settlement_list').temp($('#T_settlement_list'),json.beans);
+				$('.hg-select').each(function(){
+					$(this).mkSelect({
+						label:'配送方式'
+					}).on('change',function(e){
+						alert(e.value);
+					});
+				});
+				$('#J_settle_loading').addClass('fn-hide').next().removeClass('fn-hide');
+			});
+		});
+
+		
+	});
 	</script>
 </body>
 </html>

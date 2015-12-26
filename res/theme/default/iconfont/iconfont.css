@@ -24,6 +24,7 @@
 .icon-dianpu:before { content: "\e610"; }
 .icon-fasong:before { content: "\e60f"; }
 .icon-dizhi:before { content: "\e61d"; }
+.icon-loading:before { content: "\e60b"; }
 .icon-cartfill:before { content: "\e600"; }
 .icon-cart:before { content: "\e601"; }
 .icon-select:before { content: "\e603"; }

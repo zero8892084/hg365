@@ -36,6 +36,14 @@
             shopCarInvalid:{//验证购物车中的项是否失效
                   static:"../../data/user/isInvalid.json",
                   remote:baseUrl+""
+            },
+            settlement:{//获取运费，并根据运费排列商品
+                  static:"../../data/user/settlement.json",
+                  remote:baseUrl+""
+            },
+            address:{//获取地址列表
+                  static:"../../data/user/address.json",
+                  remote:baseUrl+""
             }
       }
       

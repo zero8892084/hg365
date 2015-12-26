@@ -232,68 +232,14 @@ body .fn-hide-vb{
 }
 /*shortcut.html end*/
 /*shopcar.html start*/
-.shopcar-foot{
-    height:1.2rem;
-}
-.shopcar-foot .hg-btn-red{
-    padding:.09rem .5rem;
-    margin-top:.15rem;
-}
-.shopcar-foot-all{
-    margin-left:.1rem;
-    margin-top:.38rem;
-    float: left;
-}
-.shopcar-foot .shopcar-store-check{
-    float: none;
-    margin: 0;
-}
-.shopcar-foot-total{
-    height:.4rem;
-    line-height: .4rem
-}
-.shopcar-foot-info .hg-text-price{
-    font-size: 16px;
-    vertical-align: bottom;
-}
-.shopcar-foot-info .hg-text{
-    font-size: 16px;
-    vertical-align: bottom;
-}
-.shopcar-foot-info .hg-desc{
-    font-size: 12px;
-    height:.35rem;
-    line-height: .37rem;
-    vertical-align: bottom;
-}
-/*.shopcar-foot-info .hg-label{
-    font-size: 12px;
-    color:#999999;
-    width:1.05rem;
-}*/
-.shopcar-foot-info{
-    overflow: hidden;
-    float:left;
-    margin-left: .1rem;
-    width:3.1rem;
-}
-.shopcar-foot-label{
-    text-align: right;
-    display: inline-block;
-    width:1.2rem;
-}
-.shopcar-foot-text{
-    text-align: right;
-    display: inline-block;
-    width:1.80rem;
-}
+
 /*shopcar.html end*/
 
 /*settlement.html start*/
 .settle-address{
-    padding:.2rem;
+    padding:.2rem .1rem;
     background-color: #FFFAF3;
-
+    border-bottom:1px solid #E1E1E1;
 }
 .settle-address p{
     margin:0;
@@ -302,6 +248,7 @@ body .fn-hide-vb{
 }
 .settle-address .hg-iconfont{
     color:#E3010D;
+    margin-right: .05rem;
 }
 .settle-address-phone{
     /*margin-left:1.2rem;*/
@@ -319,8 +266,64 @@ body .fn-hide-vb{
     padding:.2rem .1rem;
     text-align: left;
 }
+.settle-store .hg-prolist-mgt{
+    margin-top:.1rem;
+}
 .settle-store .hg-prolist li{
     background-color: #F7F7F7;
+    display:-webkit-box;
+    display: flex;
+    box-align:start;
+    -webkit-box-align:start;
+    align-items:flex-start;
+    width:100%;
+    padding:.1rem .2rem;
+    box-sizing:border-box;
+}
+.settle-store .hg-prolist li:last-child{
+}
+.settle-store .hg-prolist img{
+    -webkit-box-flex: 0.0;
+    flex:0 0 auto;
+    width: 1.75rem;
+    height: 1.75rem;
+    display: block;
+}
+.settle-store .hg-prolist-info{
+    width:2.5rem;
+    flex:1 1 auto;
+    -webkit-box-flex: 1.0;
+    padding:0 .1rem;
+    float: none;
+}
+.settle-store .hg-prolist-info h4{
+    overflow: auto;
+    text-overflow: inherit;
+    white-space: normal;
+    height: auto;
+    line-height: .4rem;
+}
+
+.settle-store .hg-store-content{
+    padding:0;
+}
+.settle-store .hg-desc{
+    margin-top: .1rem;
+    height:auto;
+    font-size: 13px;
+}
+.settle-store .hg-store-type{
+    padding-left:.1rem;
+}
+.settle-store .hg-text-price{
+    font-size: 17px;
+}
+.settle-store .hg-select{
+    border-bottom: 1px solid #f0f0f0;
+}
+.settle-loading{
+    text-align: center;
+    padding: 2rem 0;
 }
 /*settlement.html end*/
 

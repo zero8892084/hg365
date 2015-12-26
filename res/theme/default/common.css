@@ -357,6 +357,31 @@ a{
 }
 /*iconfont end*/
 
+/*loading start*/
+.hg-loading{
+	-webkit-animation:loading 1.5s linear infinite;
+	-webkit-transform-origin:50% 50%;
+	background:url(images/loading.png) no-repeat center;
+	background-size: 100%;
+	display: inline-block;
+}
+.hg-loading-big{
+	height:2rem;
+	width:2rem;
+}
+@-webkit-keyframes loading{
+	0%{
+		-webkit-transform:rotate(0deg);
+	}
+	50%{
+		-webkit-transform:rotate(180deg);
+	}
+	100%{
+		-webkit-transform:rotate(360deg);
+	}
+}
+/*loading end*/
+
 /*store product list start*/
 .hg-store{
     margin:0;
@@ -571,5 +596,100 @@ a{
     float: right;
     font-size: 12px;
 }
-/*store product list end*/
+.hg-store-price{
+	-webkit-box-flex: 0.0;
+    flex:0 0 auto;
+    margin:0;
+}
+.hg-store-price .hg-desc{
+    text-align: right;
+}
+
+.hg-slefoot{
+    height:1.2rem;
+}
+.hg-slefoot .hg-btn-red{
+    padding:.09rem .5rem;
+    margin-top:.15rem;
+}
+.hg-slefoot-all{
+    margin-left:.1rem;
+    margin-top:.38rem;
+    float: left;
+}
+.hg-slefoot .hg-store-check{
+    float: none;
+    margin: 0;
+}
+.hg-slefoot-total{
+    height:.4rem;
+    line-height: .4rem
+}
+.hg-slefoot-info .hg-text-price{
+    font-size: 16px;
+    vertical-align: bottom;
+}
+.hg-slefoot-info .hg-text{
+    font-size: 16px;
+    vertical-align: bottom;
+}
+.hg-slefoot-info .hg-desc{
+    font-size: 12px;
+    height:.35rem;
+    line-height: .37rem;
+    vertical-align: bottom;
+}
+.hg-slefoot-info{
+    overflow: hidden;
+    float:left;
+    margin-left: .1rem;
+    width:3.1rem;
+}
+.hg-slefoot-label{
+    text-align: right;
+    display: inline-block;
+    width:1.2rem;
+}
+.hg-slefoot-text{
+    text-align: right;
+    display: inline-block;
+    width:1.80rem;
+}
+.hg-slefoot-submoney{
+	float:left;
+	margin-left:.2rem;
+	margin-top:.45rem;
+}
+.hg-slefoot-submoney .hg-text-price{
+	font-size: 21px;
+	vertical-align: bottom;
+	line-height: .35rem;
+}
+.hg-slefoot-submoney .hg-text{
+	vertical-align:bottom;
+}
+/*store product foot end*/
+
+/*select start*/
+.hg-select{
+	padding:.3rem .2rem;
+	position: relative;
+}
+.hg-select-value{
+	display: inline-block;
+	width:3.8rem;
+	text-align: right;
+}
+.hg-select .hg-iconfont-rarrow{
+	float: right;
+}
+.hg-select select{
+	position: absolute;
+	top:0;
+	left:0;
+	opacity:0;
+	width:100%;
+	height:100%;
+}
+/*select end*/
 
