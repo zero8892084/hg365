@@ -236,32 +236,6 @@ body .fn-hide-vb{
 /*shopcar.html end*/
 
 /*settlement.html start*/
-.settle-address{
-    padding:.2rem .1rem;
-    background-color: #FFFAF3;
-    border-bottom:1px solid #E1E1E1;
-}
-.settle-address p{
-    margin:0;
-    margin-bottom:.15rem;
-    width:5.5rem;
-}
-.settle-address .hg-iconfont{
-    color:#E3010D;
-    margin-right: .05rem;
-}
-.settle-address-phone{
-    /*margin-left:1.2rem;*/
-}
-.settle-address-arrow{
-    margin-top:.7rem;
-}
-.settle-address-detail{
-    font-size: 12px;
-    width:5rem;
-    display: inline-block;
-    vertical-align: middle;
-}
 .settle-store .hg-store-title{
     padding:.2rem .1rem;
     text-align: left;

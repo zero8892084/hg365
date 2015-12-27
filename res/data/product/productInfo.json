@@ -35,8 +35,8 @@
             }
     	],
     	"imgs":[
-            "http://132.37.4.175:8080/storageserver/image/5661560ce2e0e3290a29af52.jpg",
-            "http://132.37.4.175:8080/storageserver/image/5661570ee2e0e3290a29af58.jpg",
+            "../../test/7.png",
+            "../../test/8.png",
             "../../test/1.png",
             "../../test/2.png"
         ]

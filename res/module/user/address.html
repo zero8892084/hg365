@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>选择地址</title>
+<% include ../include/res.html %>
+</head>
+<body>
+	<div id="J_content" class="hg-content">
+		<% include ../include/head.html %>
+		<div id="J_body" class="hg-body">
+			<div id="J_address_list"></div>
+		</div>
+		<% include ../include/foot.html %>
+	</div>
+	<% include ../include/js.html %>
+	<textarea class="fn-hide" id="T_address_list">
+		{{#each this}}
+		<div class="hg-address {{isCur id}}" data-json="{{jts this}}" id="J_settlement_address">
+			<div class="hg-address-icon hg-iconfont hg-iconfont-selected fn-right"></div>
+			<p class="">
+				<span class="hg-text">
+					<span class="hg-iconfont hg-iconfont-ouser"></span> {{name}}
+				</span>
+				<span class="hg-text fn-right">
+					<span class="hg-iconfont hg-iconfont-phone"></span>	{{phone}} 
+				</span>
+			</p>
+			<p class="">
+				<span class="hg-text">
+					<span class="hg-iconfont hg-iconfont-idcard"></span> {{idcard}}
+				</span>
+			</p>
+			<p class="">
+				<span class="hg-text">
+					<span class="hg-iconfont hg-iconfont-address"></span>
+					<span class="hg-address-detail">{{address}}</span>
+				</span>
+			</p>	
+		</div>
+		<div class="hg-address-op fn-clear">
+			<span class="fn-left hg-desc">
+				<span class="hg-iconfont hg-iconfont-delete"></span>
+				删除
+			</span>
+			<span class="fn-right hg-desc">
+				<span class="hg-iconfont hg-iconfont-edit"></span>
+				编辑	
+			</span>	
+		</div>
+		{{/each}}
+	</textarea>
+	<script type="text/javascript">
+	$('#J_head_title').html('选择地址');
+	$(function(){
+		var address=hg.cache.get('chooseAddress');
+		var curId;
+		Handlebars.registerHelper('isCur', function(id){
+			if(id==curId){
+				return 'hg-address-selected';
+			}else{
+				return '';
+			}
+	    });
+
+		hg.data({
+			url:cfg.get('address'),
+			cache:{
+				name:'address',//缓存名称
+				maxAge:5*60*1000,//缓存时长
+				count:0//缓存次数，调用十次缓存之后重新从后台获取
+			}
+		}).done(function(json){
+			if(address){
+				curId=address.id;
+			}else{
+				for(var i in json.beans){
+					if(json.beans[i].isDefault){
+						curId=json.beans[i].id;
+					}
+				}
+			}
+			$('#J_address_list').temp($('#T_address_list'),json.beans).on('click','.hg-address',function(){
+				var json=$(this).data('json');
+				hg.cache.set('chooseAddress',json);
+				window.history.go(-1);
+			});
+		});
+	});
+	</script>
+</body>
+</html>

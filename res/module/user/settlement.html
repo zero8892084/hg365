@@ -10,12 +10,12 @@
 		<div id="J_body" class="hg-body hg-box-bt">
 			<div class="settle-loading" id="J_settle_loading">
 				<span class="hg-loading hg-loading-big"></span>
-				<p class="hg-text">正在帮您计算，请稍候......</p>
+				<p class="hg-text">正在帮您清点商品，请稍候......</p>
 			</div>
 			<div class="fn-hide">
-				<div class="settle-address" id="J_settlement_address">
-				
-				</div>
+				<a href="address.html" class="hg-address hg-address-selected" id="J_settlement_address">
+					
+				</a>
 				<ul class="hg-store settle-store" id="J_settlement_list">
 					
 				</ul>
@@ -119,12 +119,12 @@
 			{{/each}}
 		</textarea>
 		<textarea class="fn-hide" id="T_settlement_address">
-			<div class="settle-address-arrow hg-iconfont hg-iconfont-rarrow fn-right"></div>
+			<div class="hg-address-icon hg-iconfont hg-iconfont-rarrow fn-right"></div>
 			<p class="">
 				<span class="hg-text">
 					<span class="hg-iconfont hg-iconfont-ouser"></span> {{name}}
 				</span>
-				<span class="hg-text settle-address-phone fn-right">
+				<span class="hg-text fn-right">
 					<span class="hg-iconfont hg-iconfont-phone"></span> {{phone}}
 				</span>
 			</p>
@@ -136,7 +136,7 @@
 			<p class="">
 				<span class="hg-text">
 					<span class="hg-iconfont hg-iconfont-address"></span>
-					<span class="settle-address-detail">{{address}}</span>
+					<span class="hg-address-detail">{{address}}</span>
 				</span>
 			</p>
 		</textarea>
@@ -145,15 +145,32 @@
 	<script type="text/javascript">
 	$('#J_head_title').html('确认订单');
 	$(function(){
-		hg.data({
-			url:cfg.get('address')
-		}).done(function(json){
-			for(var i=0;i<json.beans.length;i++){
-				if(json.beans[i].isDefault){
-					$('#J_settlement_address').temp($('#T_settlement_address'),json.beans[i]);
-					break;
+		var address=hg.cache.get('chooseAddress');
+		if(address){
+			$('#J_settlement_address').temp($('#T_settlement_address'),address);
+			init();
+		}else{
+			hg.data({
+				url:cfg.get('address'),
+				cache:{
+					name:'address',//缓存名称
+					maxAge:5*60*1000,//缓存时长
+					count:0//缓存次数
 				}
-			}
+			}).done(function(json){
+				for(var i=0;i<json.beans.length;i++){
+					if(json.beans[i].isDefault){
+						$('#J_settlement_address').temp($('#T_settlement_address'),json.beans[i]);
+						hg.cache.set('chooseAddress',json.beans[i]);
+						break;
+					}
+				}
+				init();
+			});
+		};
+		
+
+		function init(){
 			hg.data({
 				url:cfg.get('settlement'),
 				data:''
@@ -163,14 +180,12 @@
 					$(this).mkSelect({
 						label:'配送方式'
 					}).on('change',function(e){
-						alert(e.value);
+						//alert(e.value);
 					});
 				});
 				$('#J_settle_loading').addClass('fn-hide').next().removeClass('fn-hide');
-			});
-		});
-
-		
+			});	
+		}	
 	});
 	</script>
 </body>

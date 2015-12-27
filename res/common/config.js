@@ -74,14 +74,8 @@
 
 
       var cache={
-            /*"login":{
-                  url:cfg.get('login'),
-                  key:'login',
-                  maxAge:60*1000,//缓存时长,毫秒,默认为0，为0的时候表示无限长
-                  count:0//缓存读取次数
-            }*/
-            "record":{//播放记录
-                  key:'record'
+            "chooseAddress":{//已选择的地址
+                  key:'chooseAddress'
             }
       }
       window.cacheCfg=cache;

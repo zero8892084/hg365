@@ -355,6 +355,12 @@ a{
 .hg-iconfont-address:before{
 	content:'\e61d';
 }
+.hg-iconfont-edit:before{
+	content:'\e61e';
+}
+.hg-iconfont-selected:before{
+	content:'\e618';
+}
 /*iconfont end*/
 
 /*loading start*/
@@ -692,4 +698,46 @@ a{
 	height:100%;
 }
 /*select end*/
+
+/*address start*/
+.hg-address{
+	display: block;
+    padding:.2rem .1rem;
+    background-color: #FFF;
+    border-bottom:1px solid #E1E1E1;
+    border-top:1px solid #E1E1E1;
+    margin-top:.2rem;
+}
+.hg-address p{
+    margin:0;
+    margin-bottom:.15rem;
+    width:5.5rem;
+}
+.hg-address .hg-iconfont{
+    color:#E3010D;
+    margin-right: .05rem;
+}
+.hg-address-icon{
+    margin-top:.65rem;
+    font-size: 23px;
+    display: none;
+}
+.hg-address-detail{
+    font-size: 12px;
+    width:5rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+.hg-address-op{
+	background: #F9F9F9;	
+	padding:.2rem .1rem;
+	border-bottom:1px solid #E1E1E1;
+}
+.hg-address-selected{
+	background-color: #FFFAF3;
+}
+.hg-address-selected .hg-address-icon{
+	display: block;
+}
+/*address end*/
 
