@@ -380,15 +380,15 @@
         var al=$('#J_alert');
         al.html(message);
         al.removeClass('fn-hide')
-          .removeClass('hg-dialog-alert-up')
-          .addClass('hg-dialog-alert-down');
+          .removeClass('hg-dialog-up')
+          .addClass('hg-dialog-down');
         time=time||2500;
         setTimeout(function(){
-            al.removeClass('hg-dialog-alert-down')
-              .addClass('hg-dialog-alert-up');
+            al.removeClass('hg-dialog-down')
+              .addClass('hg-dialog-up');
             setTimeout(function(){
                 al.addClass('fn-hide');
-            },170);
+            },250);
         },time);
     }
     hg.object=function(obj){
@@ -515,6 +515,14 @@
         return this;
     }
 })($);
+
+//定义confirm
+$(function(){
+    var zconfirm=new ZConfirm();
+    hg.confirm=function(cfg){
+        zconfirm.show(cfg);
+    }
+});
 
 
 

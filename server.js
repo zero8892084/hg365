@@ -54,6 +54,6 @@ app.listen('8088','localhost',function(){
 });
 
 app.listen('8088','192.168.1.101',function(){
-	console.log('listen 192.168.1.104:8088');
+	console.log('listen 192.168.1.101:8088');
 });
 

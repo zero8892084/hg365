@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>地址管理</title>
+<% include ../include/res.html %>
+</head>
+<body>
+	<div id="J_content" class="hg-content">
+		<% include ../include/head.html %>
+		<div id="J_body" class="hg-body">
+			<form class="hg-form fn-mgt3" id="J_regist_form">
+				<div class="hg-form-block">
+					<div class="hg-form-item fn-border-bottom">
+						<label class="hg-label">收货人姓名</label>
+						<input name="name" placeholder="请输入收货人姓名"/>
+					</div>
+					<div class="hg-form-item">
+						<label class="hg-label">手机号码</label>
+						<input name="phone" placeholder="请输入您的手机号码" type="tel"/>
+					</div>
+				</div>
+				<div class="hg-form-block fn-mgt3">
+					<div class="hg-form-item fn-border-bottom">
+						<label class="hg-label">所在地区</label>
+						<input name="region" placeholder="请选择您所在地区"/>
+					</div>
+					<div class="hg-form-item">
+						<label class="hg-label">详细地址</label>
+						<input name="address" placeholder="请输入您的详细地址"/>
+					</div>
+				</div>
+				<div  class="hg-form-block fn-mgt3">
+					<div class="hg-form-item">
+						<label class="hg-label">身份证号</label>
+						<input name="idcard" placeholder="请输入您的身份证号"/>
+					</div>
+				</div>
+
+				<div class="hg-warn fn-clear">
+					<span class="hg-iconfont hg-iconfont-warn"></span>
+					<span class="hg-warn-text">跨境保税交易必须提供真实姓名和身份证信息，否则无法通过海关认证！</span>
+				</div>
+
+				<div class="hg-btn hg-btn-red-l" id="J_address_submit">保存地址</div>
+			</form>
+		</div>
+		<% include ../include/foot.html %>
+		<textarea class="fn-hide" id="T_addres_confirm">
+			<div class="hg-address address-confirm-info">
+				<p class="">
+					<span class="hg-text">
+						<span class="hg-iconfont hg-iconfont-ouser"></span> {{name}}
+					</span>
+					<span class="hg-text fn-right">
+						<span class="hg-iconfont hg-iconfont-phone"></span>	{{phone}} 
+					</span>
+				</p>
+				<p class="">
+					<span class="hg-text">
+						<span class="hg-iconfont hg-iconfont-idcard"></span> {{idcard}}
+					</span>
+				</p>
+				<p class="">
+					<span class="hg-text">
+						<span class="hg-iconfont hg-iconfont-address"></span>
+						<span class="hg-address-detail">{{address}}</span>
+					</span>
+				</p>
+			</div>
+		</textarea>
+	</div>
+	<% include ../include/js.html %>
+	<script type="text/javascript">
+		$('#J_head_title').html('地址管理');
+		$(function(){
+			$('#J_address_submit').on('touchend',function(){
+				var fo=hg.form($('#J_regist_form'));
+				var data=fo.val();
+				var c=Handlebars.compile($('#T_addres_confirm').val());
+				var html=c(data);
+				hg.confirm({
+					title:'地址信息确认',
+					html:html,
+					ok:{
+						text:'确认保存',
+						callback:function(){
+							
+						}
+					},
+					cancel:{
+						text:'返回编辑'
+					}
+				});
+			})
+		});
+	</script>
+</body>
+</html>

@@ -301,6 +301,25 @@ body .fn-hide-vb{
 }
 /*settlement.html end*/
 
+/*address.html start*/
+.address-add{
+    margin:.15rem auto;
+}
+.address-add .hg-iconfont{
+    color:#FFF;
+    font-size: 17px;
+}
+.address-confirm-info{
+    margin:0;
+}
+.address-confirm-info p{
+    width:5rem;
+}
+.address-confirm-info .hg-address-detail{
+    width:4.5rem;
+}
+/*address.html end*/
+
 
 
 

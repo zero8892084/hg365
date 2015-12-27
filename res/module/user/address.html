@@ -7,8 +7,11 @@
 <body>
 	<div id="J_content" class="hg-content">
 		<% include ../include/head.html %>
-		<div id="J_body" class="hg-body">
+		<div id="J_body" class="hg-body hg-box-bt">
 			<div id="J_address_list"></div>
+			<div class="hg-box-foot" id="J_prodet_foot">
+				<div class="hg-btn hg-btn-red-l address-add" id=""><span class="hg-iconfont hg-iconfont-plus"></span> 新增地址</div>
+			</div>
 		</div>
 		<% include ../include/foot.html %>
 	</div>
@@ -67,7 +70,7 @@
 			cache:{
 				name:'address',//缓存名称
 				maxAge:5*60*1000,//缓存时长
-				count:0//缓存次数，调用十次缓存之后重新从后台获取
+				count:0//缓存次数
 			}
 		}).done(function(json){
 			if(address){
