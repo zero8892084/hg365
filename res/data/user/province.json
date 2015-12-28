@@ -1,0 +1,216 @@
+{
+	"code":0,
+	"message":"",
+    "beans": [
+        {
+            "areaName": "北京",
+            "id": 1,
+            "parentId": 0,
+            "sort": 1
+        },
+        {
+            "areaName": "上海",
+            "id": 2,
+            "parentId": 0,
+            "sort": 2
+        },
+        {
+            "areaName": "天津",
+            "id": 3,
+            "parentId": 0,
+            "sort": 3
+        },
+        {
+            "areaName": "重庆",
+            "id": 4,
+            "parentId": 0,
+            "sort": 4
+        },
+        {
+            "areaName": "河北",
+            "id": 5,
+            "parentId": 0,
+            "sort": 5
+        },
+        {
+            "areaName": "山西",
+            "id": 6,
+            "parentId": 0,
+            "sort": 6
+        },
+        {
+            "areaName": "河南",
+            "id": 7,
+            "parentId": 0,
+            "sort": 7
+        },
+        {
+            "areaName": "辽宁",
+            "id": 8,
+            "parentId": 0,
+            "sort": 8
+        },
+        {
+            "areaName": "吉林",
+            "id": 9,
+            "parentId": 0,
+            "sort": 9
+        },
+        {
+            "areaName": "黑龙江",
+            "id": 10,
+            "parentId": 0,
+            "sort": 10
+        },
+        {
+            "areaName": "内蒙古",
+            "id": 11,
+            "parentId": 0,
+            "sort": 11
+        },
+        {
+            "areaName": "江苏",
+            "id": 12,
+            "parentId": 0,
+            "sort": 12
+        },
+        {
+            "areaName": "山东",
+            "id": 13,
+            "parentId": 0,
+            "sort": 13
+        },
+        {
+            "areaName": "安徽",
+            "id": 14,
+            "parentId": 0,
+            "sort": 14
+        },
+        {
+            "areaName": "浙江",
+            "id": 15,
+            "parentId": 0,
+            "sort": 15
+        },
+        {
+            "areaName": "福建",
+            "id": 16,
+            "parentId": 0,
+            "sort": 16
+        },
+        {
+            "areaName": "湖北",
+            "id": 17,
+            "parentId": 0,
+            "sort": 17
+        },
+        {
+            "areaName": "湖南",
+            "id": 18,
+            "parentId": 0,
+            "sort": 18
+        },
+        {
+            "areaName": "广东",
+            "id": 19,
+            "parentId": 0,
+            "sort": 19
+        },
+        {
+            "areaName": "广西",
+            "id": 20,
+            "parentId": 0,
+            "sort": 20
+        },
+        {
+            "areaName": "江西",
+            "id": 21,
+            "parentId": 0,
+            "sort": 21
+        },
+        {
+            "areaName": "四川",
+            "id": 22,
+            "parentId": 0,
+            "sort": 22
+        },
+        {
+            "areaName": "海南",
+            "id": 23,
+            "parentId": 0,
+            "sort": 23
+        },
+        {
+            "areaName": "贵州",
+            "id": 24,
+            "parentId": 0,
+            "sort": 24
+        },
+        {
+            "areaName": "云南",
+            "id": 25,
+            "parentId": 0,
+            "sort": 25
+        },
+        {
+            "areaName": "西藏",
+            "id": 26,
+            "parentId": 0,
+            "sort": 26
+        },
+        {
+            "areaName": "陕西",
+            "id": 27,
+            "parentId": 0,
+            "sort": 27
+        },
+        {
+            "areaName": "甘肃",
+            "id": 28,
+            "parentId": 0,
+            "sort": 28
+        },
+        {
+            "areaName": "青海",
+            "id": 29,
+            "parentId": 0,
+            "sort": 29
+        },
+        {
+            "areaName": "宁夏",
+            "id": 30,
+            "parentId": 0,
+            "sort": 30
+        },
+        {
+            "areaName": "新疆",
+            "id": 31,
+            "parentId": 0,
+            "sort": 31
+        },
+        {
+            "areaName": "台湾",
+            "id": 32,
+            "parentId": 0,
+            "sort": 32
+        },
+        {
+            "areaName": "香港",
+            "id": 42,
+            "parentId": 0,
+            "sort": 33
+        },
+        {
+            "areaName": "澳门",
+            "id": 43,
+            "parentId": 0,
+            "sort": 34
+        },
+        {
+            "areaName": "钓鱼岛",
+            "id": 84,
+            "parentId": 0,
+            "sort": 35
+        }
+    ]
+}

@@ -379,6 +379,9 @@ a{
 .hg-iconfont-plus:before{
 	content:'\e61f';
 }
+.hg-iconfont-shopcar:before{
+	content:'\e601';
+}
 /*iconfont end*/
 
 /*loading start*/

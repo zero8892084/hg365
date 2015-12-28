@@ -1,11 +1,11 @@
 ;(function(){
       var baseUrl="";
       var dataArray = {
-            productInfo:{//产品详细
+            productInfo:{//产品详细页-产品详细
                   static:"../../data/product/productInfo.json",
                   remote:baseUrl+""
             },
-            inv:{//获取库存
+            inv:{//产品详细页-获取库存
                   static:"../../data/product/inventory.json",
                   remote:baseUrl+""
             },
@@ -29,20 +29,32 @@
                   static:"../../data/login/sendMessage.json",
                   remote:baseUrl+""
             },
-            shopCar:{//获取购物车列表
+            shopCar:{//购物车-获取购物车列表
                   static:"../../data/user/shopCar.json",
                   remote:baseUrl+""
             },
-            shopCarInvalid:{//验证购物车中的项是否失效
+            shopCarInvalid:{//购物车-验证购物车中的项是否失效
                   static:"../../data/user/isInvalid.json",
                   remote:baseUrl+""
             },
-            settlement:{//获取运费，并根据运费排列商品
+            settlement:{//结算页-获取运费，并根据运费排列商品
                   static:"../../data/user/settlement.json",
                   remote:baseUrl+""
             },
-            address:{//获取地址列表
+            address:{//地址管理-获取地址列表
                   static:"../../data/user/address.json",
+                  remote:baseUrl+""
+            },
+            province:{//地址管理-获取省級列表
+                  static:"../../data/user/province.json",
+                  remote:baseUrl+""
+            },
+            saveAddress:{//地址管理-保存地址
+                  static:"../../data/user/province.json",
+                  remote:baseUrl+""
+            },
+            prodetToShopcar:{//产品详细页-添加到购物车
+                  static:"../../data/user/province.json",
                   remote:baseUrl+""
             }
       }
@@ -76,6 +88,9 @@
       var cache={
             "chooseAddress":{//已选择的地址
                   key:'chooseAddress'
+            },
+            "editAddress":{//需要修改的地址
+                  key:'editAddress'
             }
       }
       window.cacheCfg=cache;

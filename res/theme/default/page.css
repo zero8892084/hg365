@@ -161,7 +161,7 @@ body .fn-hide-vb{
     
 }
 .play-type-inv{
-    padding-left:1.8rem;
+    padding-left:1.9rem;
     vertical-align: bottom;
     line-height: 24px;
     font-size: 15px;
@@ -170,7 +170,7 @@ body .fn-hide-vb{
     text-align: center;
 }
 .prodet-tax{
-    margin-bottom:.15rem;
+    margin:.15rem 0;
 }
 .prodet-exp{
     font-size: 15px;
@@ -216,6 +216,19 @@ body .fn-hide-vb{
     font-family: "iconfont";
     font-size: 16px;
     color:#666666;
+}
+.prodet-shopcar{
+    display: inline-block;
+    height:.7rem;
+    width: .7rem;
+    background-color: rgba(0,0,0,0.5);
+    line-height: .7rem;
+    font-size: 26px;
+    text-align: center;
+    color:#FFF;
+    border-radius: .35rem;
+    margin-top:.14rem;
+    margin-left: .2rem;
 }
 /*productDetail.html end*/
 /*shortcut.html login.html start*/
@@ -317,6 +330,22 @@ body .fn-hide-vb{
 }
 .address-confirm-info .hg-address-detail{
     width:4.5rem;
+}
+.address-area{
+    position: absolute;
+    top:45px;
+    left:0;
+    background-color: #FFF;
+    width:100%;
+    min-height:120%;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.address-area li{
+    list-style: none;
+    padding:.3rem 0rem .3rem .3rem;
+    border-bottom:1px solid #E8E8E8;
 }
 /*address.html end*/
 

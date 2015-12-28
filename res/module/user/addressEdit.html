@@ -16,13 +16,19 @@
 					</div>
 					<div class="hg-form-item">
 						<label class="hg-label">手机号码</label>
-						<input name="phone" placeholder="请输入您的手机号码" type="tel"/>
+						<input name="phone" maxlength="11" placeholder="请输入您的手机号码" type="tel"/>
 					</div>
 				</div>
 				<div class="hg-form-block fn-mgt3">
-					<div class="hg-form-item fn-border-bottom">
+					<div class="hg-form-item fn-border-bottom" id="J_addres_province">
 						<label class="hg-label">所在地区</label>
-						<input name="region" placeholder="请选择您所在地区"/>
+						<input name="regionAll" placeholder="请选择您所在地区"/>
+						<input type="hidden" name="provId"/>
+						<input type="hidden" name="cityId"/>
+						<input type="hidden" name="areaId"/>
+						<input type="hidden" name="prov"/>
+						<input type="hidden" name="city"/>
+						<input type="hidden" name="area"/>
 					</div>
 					<div class="hg-form-item">
 						<label class="hg-label">详细地址</label>
@@ -43,7 +49,11 @@
 
 				<div class="hg-btn hg-btn-red-l" id="J_address_submit">保存地址</div>
 			</form>
+			<ul class="address-area fn-hide" id="J_address_area">
+				
+			</ul>
 		</div>
+
 		<% include ../include/foot.html %>
 		<textarea class="fn-hide" id="T_addres_confirm">
 			<div class="hg-address address-confirm-info">
@@ -68,14 +78,61 @@
 				</p>
 			</div>
 		</textarea>
+		<textarea class="fn-hide" id="T_address_area">
+			{{#each this}}
+				<li class="hg-text" data-id="{{id}}">{{areaName}}</li>
+			{{/each}}
+		</textarea>
 	</div>
 	<% include ../include/js.html %>
 	<script type="text/javascript">
-		$('#J_head_title').html('地址管理');
+		
+		var edit=hg.cache.get('editAddress');
+		if(edit){
+			edit.regionAll=edit.prov+edit.city+edit.area;
+			$('#J_head_title').html('地址修改');
+			var fo=hg.form($('#J_regist_form'));
+			fo.val(edit);
+		}else{
+			$('#J_head_title').html('新增地址');
+		}
 		$(function(){
+
+
 			$('#J_address_submit').on('touchend',function(){
 				var fo=hg.form($('#J_regist_form'));
 				var data=fo.val();
+
+				if(!data.name){
+					hg.alert('请输入收货人姓名');
+					return;
+				}
+
+				if(!data.phone){
+					hg.alert('请输入您的手机号码');
+					return;
+				}
+
+				if(!data.phone.match(hg.regExp.cellphone)){
+					hg.alert('请输入正确的手机号码');
+					return;
+				}
+
+				if(!data.areaId){
+					hg.alert('请选择您所在地区');
+					return;
+				}
+
+				if(!data.address){
+					hg.alert('请输入您的详细地址');
+					return;
+				}
+
+				if(!data.idcard){
+					hg.alert('请输入您的身份证号');
+					return;
+				}
+
 				var c=Handlebars.compile($('#T_addres_confirm').val());
 				var html=c(data);
 				hg.confirm({
@@ -84,14 +141,75 @@
 					ok:{
 						text:'确认保存',
 						callback:function(){
-							
+							hg.data({
+								url:cfg.get('saveAddress'),
+								data:data
+							}).done(function(){
+								hg.alert('保存成功！正在返回地址列表...');
+								setTimeout(function(){
+									window.history.go(-1);
+								},2000);
+							}).fail(function(json){
+								hg.alert(json.message);	
+							});
 						}
 					},
 					cancel:{
 						text:'返回编辑'
 					}
 				});
-			})
+			});
+
+
+
+
+
+			var PROV=0,//选择省份
+				CITY=1,//选择地市
+				AREA=2;//选择区域
+			var map=[CITY,AREA];
+			var result=[];
+			var resultText=[];
+			var cur;
+			$('#J_addres_province').on('touchend',function(){
+				cur=PROV;
+				result=[];
+				resultText=[];
+				mkProvince(0);
+				return false;
+			});
+
+			$('#J_address_area').on('click','li',function(){
+				var pid=$(this).data('id');
+				var text=$(this).html();
+				result[cur]=pid;
+				resultText[cur]=text;
+				if(cur==AREA){
+					$('#J_address_area').addClass('fn-hide');
+					var text=resultText.join('');
+					$('input[name=regionAll]').val(text);
+					$('input[name=area]').val(resultText[2]);
+					$('input[name=city]').val(resultText[1]);
+					$('input[name=prov]').val(resultText[0]);
+					$('input[name=areaId]').val(result[2]);
+					$('input[name=cityId]').val(result[1]);
+					$('input[name=provId]').val(result[0]);
+				}else{
+					cur=map[cur];
+					mkProvince(pid);
+				}
+				return false;
+			});
+
+			function mkProvince(pid){
+				hg.data({
+					url:cfg.get('province'),
+					data:'parentId='+pid
+				}).done(function(json){
+					$('#J_address_area').temp($('#T_address_area'),json.beans).removeClass('fn-hide');
+					$(window).scrollTop(0);
+				});
+			}
 		});
 	</script>
 </body>

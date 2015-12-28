@@ -1,0 +1,90 @@
+{
+    "code":0,
+    "message":"",
+    "beans": [
+        {
+            "areaName": "贺州市",
+            "id": 1792,
+            "parentId": 20,
+            "sort": 1
+        },
+        {
+            "areaName": "百色市",
+            "id": 1806,
+            "parentId": 20,
+            "sort": 2
+        },
+        {
+            "areaName": "河池市",
+            "id": 1818,
+            "parentId": 20,
+            "sort": 3
+        },
+        {
+            "areaName": "崇左市",
+            "id": 3168,
+            "parentId": 20,
+            "sort": 4
+        },
+        {
+            "areaName": "南宁市",
+            "id": 1715,
+            "parentId": 20,
+            "sort": 5
+        },
+        {
+            "areaName": "柳州市",
+            "id": 1720,
+            "parentId": 20,
+            "sort": 6
+        },
+        {
+            "areaName": "桂林市",
+            "id": 1726,
+            "parentId": 20,
+            "sort": 7
+        },
+        {
+            "areaName": "梧州市",
+            "id": 1740,
+            "parentId": 20,
+            "sort": 8
+        },
+        {
+            "areaName": "北海市",
+            "id": 1746,
+            "parentId": 20,
+            "sort": 9
+        },
+        {
+            "areaName": "防城港市",
+            "id": 1749,
+            "parentId": 20,
+            "sort": 10
+        },
+        {
+            "areaName": "钦州市",
+            "id": 1753,
+            "parentId": 20,
+            "sort": 11
+        },
+        {
+            "areaName": "贵港市",
+            "id": 1757,
+            "parentId": 20,
+            "sort": 12
+        },
+        {
+            "areaName": "玉林市",
+            "id": 1761,
+            "parentId": 20,
+            "sort": 13
+        },
+        {
+            "areaName": "来宾市",
+            "id": 3044,
+            "parentId": 20,
+            "sort": 14
+        }
+    ]
+}

@@ -22,7 +22,7 @@
 				<div class="hg-box-foot hg-slefoot" id="">
 					<p class="hg-slefoot-submoney">
 						<span class="hg-text">实付款:</span>
-						<span class="hg-text-price">￥88928</span>
+						<span class="hg-text-price" id="J_settle_all">-</span>
 					</p>
 					<span class="hg-btn hg-btn-red fn-right">提交订单</span>
 				</div>
@@ -32,7 +32,7 @@
 		<% include ../include/foot.html %>
 		<textarea class="fn-hide" id="T_settlement_list">
 			{{#each this}}
-			<li>
+			<li data-storeid="{{storeId}}">
 				<div class="hg-text hg-store-title">
 					<span class="hg-iconfont hg-iconfont-store"></span>
 					<span>{{storeName}}</span>
@@ -58,7 +58,7 @@
 						{{/each}}
 					</ul>
 					<div class="hg-select">
-						<select>
+						<select data-id="{{id}}">
 							{{#each express}}
 							<option value="{{id}}">{{name}} ￥{{divide100 price}}</option>
 							{{/each}}
@@ -86,9 +86,9 @@
 						{{/each}}
 					</ul>
 					<div class="hg-select">
-						<select>
+						<select data-id="{{id}}">
 							{{#each express}}
-							<option value="{{id}}">{{name}} ￥{{divide100 price}}</option>
+							<option value="{{id}}" data-price="{{price}}">{{name}} ￥{{divide100 price}}</option>
 							{{/each}}
 						</select>
 					</div>
@@ -96,24 +96,24 @@
 				</div>
 				<div class="hg-store-total fn-clear">
 					<div class="fn-clear">
-						<div class="fn-left hg-text">共有<span class="J_shopcar_num">3</span>个包裹</div>
+						<div class="fn-left hg-text">共有<span class="J_settle_num">3</span>个包裹</div>
 						<dl class="fn-right">
 							<dt>商品总额:</dt>
-							<dd class="J_shopcar_prototal">￥23</dd>
+							<dd class="J_settle_prototal"></dd>
 							<dt>跨境关税:</dt>
-							<dd class="J_shopcar_taxtotal">￥322</dd>
+							<dd class="J_settle_taxtotal"></dd>
 							<dt>运费:</dt>
-							<dd class="J_shopcar_taxtotal">￥20</dd>
+							<dd class="J_settle_express"></dd>
 							<dt class="hg-store-total-label">小计:</dt>
-							<dd class="hg-text-price J_shopcar_total">￥2324</dd>
+							<dd class="hg-text-price J_settle_total"></dd>
 						</dl>
 					</div>
-					<div class="hg-warn hg-warn fn-clear fn-hide">
+					<!-- <div class="hg-warn hg-warn fn-clear fn-hide">
 						<span class="hg-iconfont hg-iconfont-warn"></span>
 						<span class="hg-warn-text">
 							-
 						</span>
-					</div>
+					</div> -->
 				</div>
 			</li>
 			{{/each}}
@@ -144,6 +144,8 @@
 	<% include ../include/js.html %>
 	<script type="text/javascript">
 	$('#J_head_title').html('确认订单');
+	window.settleSC={};
+	window.settleSC.data;
 	$(function(){
 		var address=hg.cache.get('chooseAddress');
 		if(address){
@@ -175,18 +177,169 @@
 				url:cfg.get('settlement'),
 				data:''
 			}).done(function(json){
+				window.settleSC.data=new Settlement(json.beans);
 				$('#J_settlement_list').temp($('#T_settlement_list'),json.beans);
 				$('.hg-select').each(function(){
 					$(this).mkSelect({
 						label:'配送方式'
 					}).on('change',function(e){
-						//alert(e.value);
+						var ele = $(e.element);
+						var id = ele.data('id');
+						var price = ele.find('option:checked').data('price');
+						window.settleSC.data.set(id,{
+							express:price
+						});
 					});
 				});
 				$('#J_settle_loading').addClass('fn-hide').next().removeClass('fn-hide');
+				
+				window.settleSC.data.on('data_change',function(e){
+					updataStore(e.storeId);
+					updateAll();	
+				});
+
+				$('#J_settlement_list>li').each(function(e){
+					var storeId=$(this).data('storeid');
+					updataStore(storeId);
+				});
+				updateAll();
 			});	
-		}	
+		}
+		function updataStore(storeId){
+			var c=window.settleSC.data.count(storeId);
+			var o=$('#J_settlement_list li[data-storeid="'+storeId+'"]');
+			o.find('.J_settle_num').html(c.pack);
+			o.find('.J_settle_prototal').html('￥'+c.proTotal/100);
+			o.find('.J_settle_taxtotal').html('￥'+c.taxTotal/100);
+			o.find('.J_settle_express').html('￥'+c.express/100);
+			o.find('.J_settle_total').html('￥'+(c.proTotal+c.taxTotal+c.express)/100);
+		}
+		function updateAll(){
+			var ca = window.settleSC.data.countAll();
+			$('#J_settle_all').html('￥'+(ca.proTotal+ca.taxTotal+ca.express)/100);
+		}
 	});
+	/*
+		每一项结构为
+		{
+			"id":"每一个分组的临时id",
+			"storeId":"",
+			"proTotal":"",
+			"express":"",
+			"type":"交易类型",
+			"taxTotal":""
+		}
+	*/
+	function Settlement(beans){
+		ZEvent.call(this);
+		var id=0;
+		this.NORMAL=0;
+		this.CROSS=1;
+		this.data=[];
+		for(var i in beans){
+			var o=beans[i];
+			for(var e in o.normal){
+				var result={id:id++,storeId:o.storeId,type:this.NORMAL};
+				var oo=o.normal[e];
+				oo.id=result.id;
+				var ex=oo.express[0];
+				result.express=(ex&&ex.price)||0;
+				result.proTotal=countProduct(oo.products).price
+				this.data.push(result);
+			}
+
+			for(var e in o.cross){
+				var result={id:id++,storeId:o.storeId,type:this.CROSS};
+				var oo=o.cross[e];
+				oo.id=result.id;
+				var ex=oo.express[0];
+				result.express=(ex&&ex.price)||0;
+				var count=countProduct(oo.products);
+				result.proTotal=count.price;
+				result.taxTotal=count.taxTotal;
+				this.data.push(result);
+			}
+		}
+		function countProduct(prods){
+			var price=0;
+			var tax=0;
+			for(var i in prods){
+				var o=prods[i];
+				price+=o.price*o.number;
+				if(o.taxRate){
+					tax+=o.price*o.number*o.taxRate/100;
+				}
+			}
+			return {
+				price:price,
+				taxTotal:tax
+			};
+		}
+	}
+	hg.inheritPrototype(Settlement,ZEvent);
+	Settlement.prototype.set=function(id,obj){
+		var storeId;
+		for(var i in this.data){
+			var o = this.data[i];
+			if(o.id==id){
+				storeId=o.storeId;
+				for(var e in obj){
+					o[e]=obj[e];
+				}
+			}
+		}
+		if(obj.hasOwnProperty('express')){
+			this.trigger({
+				name:'data_change',
+				storeId:storeId
+			});
+		}
+		return this;
+	}
+	Settlement.prototype.count=function(storeId){
+		var pack=0;
+		var tax=0;
+		var express=0;
+		var proTotal=0;
+		for(var i in this.data){
+			var o = this.data[i];
+			if(o.storeId==storeId){
+				pack++;
+				if(this.CROSS==o.type){
+					tax+=o.taxTotal;
+				}
+				express+=parseInt(o.express);
+				proTotal+=o.proTotal;
+			}
+		}
+		return {
+			pack:pack,
+			taxTotal:tax,
+			express:express,
+			proTotal:proTotal
+		}
+	}
+	Settlement.prototype.countAll=function(){
+		var pack=0;
+		var tax=0;
+		var express=0;
+		var proTotal=0;
+		for(var i in this.data){
+			var o = this.data[i];
+			pack++;
+			if(this.CROSS==o.type){
+				tax+=o.taxTotal;
+			}
+			express+=parseInt(o.express);
+			proTotal+=o.proTotal;
+		}
+		return {
+			pack:pack,
+			taxTotal:tax,
+			express:express,
+			proTotal:proTotal
+		}
+	}
 	</script>
 </body>
 </html>

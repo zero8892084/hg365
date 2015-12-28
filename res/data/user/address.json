@@ -7,48 +7,28 @@
             "name":"李德利",
             "phone":"137****0888",
             "idcard":" 4511**********0333",
-            "address":"广西南宁市青秀区东葛路29号百迪乐对面",
-            "isDefault":"true"
+            "address":"东葛路29号百迪乐对面",
+            "isDefault":"true",
+            "provId":"1",
+            "prov":"广西",
+            "cityId":"3",
+            "city":"南宁市",
+            "areaId":"5",
+            "area":"青秀区"
         },
         {
             "id":"2",
-            "name":"李彬彬",
+            "name":"李德",
             "phone":"137****0888",
             "idcard":" 4511**********0333",
-            "address":"广西民族高中20就好无名就哇咔咔电脑那些",
-            "isDefault":"false"
-        },
-        {
-            "id":"3",
-            "name":"李彬彬",
-            "phone":"137****0888",
-            "idcard":" 4511**********0333",
-            "address":"广西民族高中20就好无名就哇咔咔电脑那些",
-            "isDefault":"false"
-        },
-        {
-            "id":"4",
-            "name":"李彬彬",
-            "phone":"137****0888",
-            "idcard":" 4511**********0333",
-            "address":"广西民族高中20就好无名就哇咔咔电脑那些",
-            "isDefault":"false"
-        },
-        {
-            "id":"5",
-            "name":"李彬彬",
-            "phone":"137****0888",
-            "idcard":" 4511**********0333",
-            "address":"广西民族高中20就好无名就哇咔咔电脑那些",
-            "isDefault":"false"
-        },
-        {
-            "id":"6",
-            "name":"李彬彬",
-            "phone":"137****0888",
-            "idcard":" 4511**********0333",
-            "address":"广西民族高中20就好无名就哇咔咔电脑那些",
-            "isDefault":"false"
+            "address":"东葛路29号百迪乐对面",
+            "isDefault":"true",
+            "provId":"1",
+            "prov":"广西",
+            "cityId":"3",
+            "city":"南宁市",
+            "areaId":"5",
+            "area":"青秀区"
         }
     ]
 }

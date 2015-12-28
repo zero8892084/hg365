@@ -9,8 +9,8 @@
 		<% include ../include/head.html %>
 		<div id="J_body" class="hg-body hg-box-bt">
 			<div id="J_address_list"></div>
-			<div class="hg-box-foot" id="J_prodet_foot">
-				<div class="hg-btn hg-btn-red-l address-add" id=""><span class="hg-iconfont hg-iconfont-plus"></span> 新增地址</div>
+			<div class="hg-box-foot" id="">
+				<div class="hg-btn hg-btn-red-l address-add" id="J_address_add"><span class="hg-iconfont hg-iconfont-plus"></span> 新增地址</div>
 			</div>
 		</div>
 		<% include ../include/foot.html %>
@@ -36,7 +36,7 @@
 			<p class="">
 				<span class="hg-text">
 					<span class="hg-iconfont hg-iconfont-address"></span>
-					<span class="hg-address-detail">{{address}}</span>
+					<span class="hg-address-detail">{{prov}}{{city}}{{area}}{{address}}</span>
 				</span>
 			</p>	
 		</div>
@@ -45,7 +45,7 @@
 				<span class="hg-iconfont hg-iconfont-delete"></span>
 				删除
 			</span>
-			<span class="fn-right hg-desc">
+			<span class="fn-right hg-desc J_address_edit" data-json="{{jts this}}">
 				<span class="hg-iconfont hg-iconfont-edit"></span>
 				编辑	
 			</span>	
@@ -86,6 +86,15 @@
 				var json=$(this).data('json');
 				hg.cache.set('chooseAddress',json);
 				window.history.go(-1);
+			}).on('click','.J_address_edit',function(){
+				var json=$(this).data('json');
+				hg.cache.set('editAddress',json);
+				window.location.href='addressEdit.html';
+			});
+
+			$('#J_address_add').on('touchend',function(){
+				hg.cache.del('editAddress');
+				window.location.href='addressEdit.html';
 			});
 		});
 	});

@@ -35,7 +35,8 @@
 		ele.find('.hg-select-value').html(text);
 		this.trigger({
 			name:'change',
-			value:val
+			value:val,
+			element:$(this.cfg.element).find('select')
 		});
 	}
 

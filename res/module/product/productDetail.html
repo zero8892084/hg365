@@ -43,14 +43,14 @@
 					</div>
 				</div>
 				<div class="hg-box-content fn-mgt17">
-					<div class="hg-box-item" id="">
+					<!-- <div class="hg-box-item" id="">
 						<span class="hg-label">税号</span>
 						<span class="hg-text" id="J_prodet_taxid">-</span>
-					</div>
+					</div> -->
 					<div class="prodet-tax">
-						<span class="hg-label">税费</span>
-						<span class="hg-text-price" id="J_prodet_tax">-</span>
-						<span class="hg-text">(税率为0.44)</span>
+						<span class="hg-label">关税</span>
+						<span class="hg-text-price" id="J_prodet_tax"></span>
+						<span class="hg-desc">选择规格后计算关税</span>
 					</div>
 				</div>
 				<div class="prodet-detail-up hg-text" id="J_prodet_updrag">上拉查看详情</div>
@@ -64,8 +64,9 @@
 				</div>
 			</div>
 			<div class="hg-box-foot" id="J_prodet_foot">
-				<span class="hg-btn hg-btn-red fn-right">立即购买</span>
-				<span class="hg-btn hg-btn-red fn-right">加入购物车</span>
+				<span class="hg-iconfont hg-iconfont-shopcar prodet-shopcar J_prodet_toshopcar"></span>
+				<span class="hg-btn hg-btn-red fn-right J_prodet_buy">立即购买</span>
+				<span class="hg-btn hg-btn-red fn-right J_prodet_shopcar">加入购物车</span>
 			</div>
 		</div>
 		<% include ../include/foot.html %>
@@ -81,7 +82,7 @@
 		<h3 class="hg-title hg-title-3">{{name}}</h3>
 		<p class="hg-desc">{{desc}}</p>
 		<div class="prodet-price">
-			<span class="hg-text-price">￥{{divide100 price}}</span>
+			<span class="hg-text-price" id="J_prodet_price">{{getPrice this}}</span>
 			<span class="prodet-price-arrow">&nbsp;</span>
 		</div>
 	</textarea>
@@ -118,23 +119,51 @@
 
 				$('#J_prodet_base').temp($('#T_prodet_base'),json.bean);
 
-				var typeMap={};
-				var limitLength=json.bean.spec.length;
-				var type=$('#J_prodet_type');
-				type.temp($('#T_prodet_type'),json.bean.spec).on('touchend','li',function(){
 
+				var allSpec=mkSpec(json.bean.sks);
+				var itemMap={};
+				var type=$('#J_prodet_type');
+				var price;
+				var taxRate;
+				type.temp($('#T_prodet_type'),allSpec).on('touchend','li',function(){
 					$(this).addClass('cur').siblings().removeClass('cur');
 					var itemId=$(this).data('id');
 					var typeId=$(this).parent('.prodet-type-list').data('id');
-					typeMap[typeId]=itemId;
-					var c=0;
-					for(var i in typeMap){c++};
-					if(c==limitLength){
-						var inv=$('#J_prodet_inv');
+
+
+					/*
+						var newSks=sksFilter(json.bean.sks,itemId);
+						var newSpec=mkSpec(newSks);
+						console.log(newSpec);
+					*/
+
+					itemMap[typeId]=itemId;
+					var itemArr=[];
+					for(var i in itemMap){
+						itemArr.push(itemMap[i]);
+					}
+					var flag=false;
+					var skId;
+					for(var i in json.bean.sks){
+						var itemStr=json.bean.sks[i].itemArr.sort().join('');
+						if(itemStr==itemArr.sort().join('')){
+							flag=true;
+							skId=json.bean.sks[i].id;
+							price=json.bean.sks[i].price;
+							taxRate=json.bean.sks[i].taxRate;
+						}
+					}
+					$('#J_prodet_foot .J_prodet_shopcar').data('skid',skId);
+					if(price){
+						$('#J_prodet_price').html('￥'+price/100);
+						calcuPrice($('#J_prodet_counter input').val());
+					}
+					var inv=$('#J_prodet_inv');
+					if(flag){
 						inv.html('(正在获取...)');
 						hg.data({
 							url:cfg.get('inv'),
-							data:''
+							data:'productId='+productId+'&skId='+skId
 						}).done(function(json){
 							var t=json.bean.total;
 							inv.html('(库存'+t+'件)');
@@ -150,7 +179,7 @@
 					min:1,
 					callback:function(i){
 						calcuPrice(i);
-						/*window.location.reload();*/
+						$('#J_prodet_foot .J_prodet_shopcar').data('num',i);
 					}
 				}
 				$('#J_prodet_counter').makeCounter(couterCfg);
@@ -158,10 +187,12 @@
 				calcuPrice(couterCfg.val);
 
 				function calcuPrice(i){
-					var price = json.bean.price;
-					var taxRate=json.bean.taxRate/100;
-					var total = i*price*taxRate;
-					$('#J_prodet_tax').html('￥'+(total/100));
+					if(price){
+						var total = i*price*taxRate/100;
+						$('#J_prodet_tax').html('￥'+(total/100)).next().html('(税率'+(taxRate/100)+')').removeClass('fn-hide');
+					}/*else{
+						$('#J_prodet_tax').html('<span class="hg-desc">选择规格后计算关税</span>');
+					}*/
 				}
 
 				$('#J_prodet_taxid').html(json.bean.taxId);
@@ -174,7 +205,6 @@
 					transform:'translate3d(0,'+h+'px,0)',
 					opacity:0
 				});
-
 			}).fail(function(json){
 				hg.alert(json.returnMessage);
 			});
@@ -201,6 +231,26 @@
 					showDetail();
 				}
 			});
+
+			$('#J_prodet_foot').on('touchend','.J_prodet_shopcar',function(){
+				var skId=$('#J_prodet_foot .J_prodet_shopcar').data('skid');
+				if(!skId){
+					hg.alert('请先选择商品的规格');
+					return;
+				}
+				var num=$('#J_prodet_foot .J_prodet_shopcar').data('num');
+				hg.data({
+					url:cfg.get('prodetToShopcar'),
+					data:{skId:skId,number:num}
+				}).done(function(){
+					hg.alert('添加成功!');
+				}).fail(function(){
+					hg.alert('添加失败！');
+				});
+			}).on('touchend','.J_prodet_toshopcar',function(){
+				window.location.href='../user/shopCar.html';
+			});
+
 		});
 			
 		//上拉展示图文详情
@@ -208,7 +258,7 @@
 			//手指滑动变量初始化
 			var bottomTouchFlag=false;
 			var initY=0;
-			var distance=120;
+			var distance=180;
 			var offset=50;//修正偏移量
 			$('#J_prodet_product').on('touchstart',function(e){
 				var w=$(window);
@@ -307,6 +357,73 @@
 				$('#J_prodet_headtab li:eq(0)').addClass('cur').siblings().removeClass('cur');
 			},350);
 		}
+
+		/*function sksFilter(sks,itemId){
+			var result=[];
+			for(var i in sks){
+				var o=sks[i];		
+				for(var e in o.spec){
+					var oo=o.spec[e];
+					if(oo.itemId==itemId){
+						result.push(o);
+					}
+				}
+			}
+			return result;
+		}*/
+
+		function mkSpec(sks){
+			var specArr={};
+			for(var i=0;i<sks.length;i++){
+				var prod = sks[i];
+				prod.itemArr=[];
+				for(var e=0;e<prod.spec.length;e++){
+					var spec=prod.spec[e];
+					var to=specArr[spec.typeId];
+					if(!to){
+						to=[];
+						specArr[spec.typeId]=to;
+					}
+					to.push(spec);
+					prod.itemArr.push(spec.itemId);
+				}
+			}
+			var allSpec=[];
+			for(var i in specArr){
+				var spec=specArr[i];
+				var o = {
+					type:spec[0].type,
+					id:spec[0].typeId,
+					items:[]
+				}
+				for(var e in spec){
+					o.items.push({
+						label:spec[e].item,
+						id:spec[e].itemId
+					});
+				}
+				allSpec.push(o);
+			}
+			return allSpec;
+		}
+		Handlebars.registerHelper('getPrice', function(bean){
+			var b=bean.sks[0].price,
+				l=bean.sks[0].price;
+
+			for(var i = 0;i<bean.sks.length;i++){
+				if(bean.sks[i].price>=b){
+					b=bean.sks[i].price;
+				}
+				if(bean.sks[i].price<=l){
+					l=bean.sks[i].price;
+				}
+			}
+			var	str='￥'+l/100;
+			if(b!=l){
+				str+='-￥'+b/100;
+			}
+			return str;
+	    });
 	</script>
 </body>
 </html>
