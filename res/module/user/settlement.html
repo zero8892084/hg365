@@ -150,7 +150,7 @@
 		var address=hg.cache.get('chooseAddress');
 		if(address){
 			$('#J_settlement_address').temp($('#T_settlement_address'),address);
-			init();
+			init(address.id);
 		}else{
 			hg.data({
 				url:cfg.get('address'),
@@ -164,18 +164,23 @@
 					if(json.beans[i].isDefault){
 						$('#J_settlement_address').temp($('#T_settlement_address'),json.beans[i]);
 						hg.cache.set('chooseAddress',json.beans[i]);
+						init(json.beans[i].id);
 						break;
 					}
 				}
-				init();
 			});
 		};
 		
 
-		function init(){
+		function init(addressId){
+			var settlePros = hg.cache.get('settlePros');
+			if(!settlePros){
+				console.error('没有传入参数');
+				return;
+			}
 			hg.data({
 				url:cfg.get('settlement'),
-				data:''
+				data:'pros='+JSON.stringify(settlePros)+'&address='+addressId,
 			}).done(function(json){
 				window.settleSC.data=new Settlement(json.beans);
 				$('#J_settlement_list').temp($('#T_settlement_list'),json.beans);

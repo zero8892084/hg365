@@ -1,6 +1,6 @@
 {
     "code": 0,
-    "msg":"",
+    "message":"",
     "bean": {
 	    "id":"10010",
     	"name":"三星Galaxy 银河手机双曲面无边框",
@@ -11,6 +11,7 @@
                 "price":"120300",
                 "taxId":"1002932",
                 "taxRate":"32",
+                "count":"10",
                 "spec":[
                     {
                         "typeId":"22",
@@ -30,6 +31,7 @@
                 "id":"10030",
                 "price":"120301",
                 "taxId":"1002932",
+                "count":"0",
                 "taxRate":"32",
                 "spec":[
                     {
@@ -37,6 +39,47 @@
                         "type":"颜色",
                         "itemId":"225",
                         "item":"天蓝色"
+                    },
+                    {
+                        "typeId":"22",
+                        "type":"尺寸",
+                        "itemId":"224",
+                        "item":"3.7寸"
+                    }
+                ]
+            },
+            {
+                "id":"10030",
+                "price":"120301",
+                "taxId":"1002932",
+                "count":"0",
+                "taxRate":"32",
+                "spec":[
+                    {
+                        "typeId":"23",
+                        "type":"颜色",
+                        "itemId":"225",
+                        "item":"天蓝色"
+                    },{
+                        "typeId":"22",
+                        "type":"尺寸",
+                        "itemId":"222",
+                        "item":"3.5寸"
+                    }
+                ]
+            },
+            {
+                "id":"10030",
+                "price":"120301",
+                "taxId":"1002932",
+                "count":"1",
+                "taxRate":"32",
+                "spec":[
+                    {
+                        "typeId":"23",
+                        "type":"颜色",
+                        "itemId":"223",
+                        "item":"刘梅煮茶色"
                     },
                     {
                         "typeId":"22",

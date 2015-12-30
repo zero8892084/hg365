@@ -1,13 +1,32 @@
 {
     "code": 0,
     "message":"",
-    "beans": [
-    	{
-            "id":"",
-            "name":"",
-            "phone":"",
-            "idcard":"",
-            "address":""
-        }
-    ]
+    "bean": {
+        "id":"10010",
+        "name":"三星Galaxy 银河手机双曲面无边框",
+        "desc":"三星2000年最新款手机，2.4G内存I5CPU，想你不敢想象",
+        "sks":[
+            {
+                "price":"120300",
+                "taxId":"1002932",
+                "taxRate":"32",
+                "type":"0",
+                "count":"0",
+                "spec":[
+                    {
+                        "typeId":"22",
+                        "type":"尺寸",
+                        "itemId":"222",
+                        "item":"3.5寸"
+                    }
+                ]
+            }
+        ],
+        "imgs":[
+            "xxxx",
+            "ddddd",
+            "xxxxx",
+            "xxxxx"
+        ]
+    }
 }

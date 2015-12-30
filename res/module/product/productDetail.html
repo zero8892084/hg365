@@ -101,6 +101,8 @@
 	<script type="text/javascript">
 		window.prodetScope={};
 		window.prodetScope.runingFlag=false;
+		window.prodetScope.allSpec;
+		window.prodetScope.counter;
 		$(function(){
 			var productId=hg.url.getUrlVar('id');
 			hg.data({
@@ -120,46 +122,52 @@
 				$('#J_prodet_base').temp($('#T_prodet_base'),json.bean);
 
 
-				var allSpec=mkSpec(json.bean.sks);
+				var allSpec=window.prodetScope.allSpec=mkSpec(json.bean.sks);	
 				var itemMap={};
 				var type=$('#J_prodet_type');
 				var price;
 				var taxRate;
 				type.temp($('#T_prodet_type'),allSpec).on('touchend','li',function(){
-					$(this).addClass('cur').siblings().removeClass('cur');
+					if($(this).hasClass('dis'))return;
+
 					var itemId=$(this).data('id');
 					var typeId=$(this).parent('.prodet-type-list').data('id');
 
+					if($(this).hasClass('cur')){
+						$(this).removeClass('cur');
+						delete itemMap[typeId];
+						var str=getPrice(json.bean);
+						$('#J_prodet_price').html(str);
+						$('#J_prodet_tax').html('').next().html('选择规格后计算关税');
+						$('#J_prodet_inv').html('(请选择规格)');
+					}else{
+						$(this).addClass('cur').siblings().removeClass('cur');
+						
+						itemMap[typeId]=itemId;
 
-					/*
-						var newSks=sksFilter(json.bean.sks,itemId);
-						var newSpec=mkSpec(newSks);
-						console.log(newSpec);
-					*/
-
-					itemMap[typeId]=itemId;
-					var itemArr=[];
-					for(var i in itemMap){
-						itemArr.push(itemMap[i]);
-					}
-					var flag=false;
-					var skId;
-					for(var i in json.bean.sks){
-						var itemStr=json.bean.sks[i].itemArr.sort().join('');
-						if(itemStr==itemArr.sort().join('')){
-							flag=true;
-							skId=json.bean.sks[i].id;
-							price=json.bean.sks[i].price;
-							taxRate=json.bean.sks[i].taxRate;
+						var itemArr=[];
+						for(var i in itemMap){
+							itemArr.push(itemMap[i]);
 						}
-					}
-					$('#J_prodet_foot .J_prodet_shopcar').data('skid',skId);
-					if(price){
-						$('#J_prodet_price').html('￥'+price/100);
-						calcuPrice($('#J_prodet_counter input').val());
-					}
-					var inv=$('#J_prodet_inv');
-					if(flag){
+
+						if(allSpec.length!=itemArr.length){
+							return;
+						}
+
+						var skId;
+						for(var i in json.bean.sks){
+							var itemStr=json.bean.sks[i].itemArr.sort().join('');
+							if(itemStr==itemArr.sort().join('')){
+								skId=json.bean.sks[i].id;
+								price=json.bean.sks[i].price;
+								taxRate=json.bean.sks[i].taxRate;
+							}
+						}
+						$('#J_prodet_foot .J_prodet_shopcar').data('skid',skId);
+						if(price){
+							$('#J_prodet_price').html('￥'+price/100);
+						}
+						var inv=$('#J_prodet_inv');
 						inv.html('(正在获取...)');
 						hg.data({
 							url:cfg.get('inv'),
@@ -167,11 +175,20 @@
 						}).done(function(json){
 							var t=json.bean.total;
 							inv.html('(库存'+t+'件)');
+							window.prodetScope.counter.setMax(t);
+							calcuPrice($('#J_prodet_counter input').val());
 						}).fail(function(){
 							inv.html('(未获取到库存)');
 						});
 					}
+
+					
 				});
+
+				var usedSpec=mkSpec(sksFilter(json.bean.sks,function(o){
+					return o.count!=0;
+				}));
+				disableType(usedSpec);
 
 				var couterCfg={
 					max:199,
@@ -182,20 +199,15 @@
 						$('#J_prodet_foot .J_prodet_shopcar').data('num',i);
 					}
 				}
-				$('#J_prodet_counter').makeCounter(couterCfg);
-
-				calcuPrice(couterCfg.val);
+				window.prodetScope.counter=$('#J_prodet_counter').makeCounter(couterCfg);
 
 				function calcuPrice(i){
-					if(price){
-						var total = i*price*taxRate/100;
-						$('#J_prodet_tax').html('￥'+(total/100)).next().html('(税率'+(taxRate/100)+')').removeClass('fn-hide');
-					}/*else{
-						$('#J_prodet_tax').html('<span class="hg-desc">选择规格后计算关税</span>');
-					}*/
+					if(!price)return;
+					var total = i*price*taxRate/100;
+					$('#J_prodet_tax').html('￥'+(total/100)).next().html('(税率'+(taxRate/100)+')');
 				}
 
-				$('#J_prodet_taxid').html(json.bean.taxId);
+				/*$('#J_prodet_taxid').html(json.bean.taxId);*/
 
 				//等待所有页面内容加载完成之后,初始化图文详情面板的位置
 				//var h=$('#J_prodet_updrag').offset().top;
@@ -358,19 +370,57 @@
 			},350);
 		}
 
-		/*function sksFilter(sks,itemId){
+		function disableType(usedList){
+			/*
+				{
+					type:"",
+					id:"",
+					items:[
+						{
+							label:"",
+							id:""
+						}
+					]
+				}
+			*/
+			var all=[];
+			for(var i in window.prodetScope.allSpec){
+				all=all.concat(window.prodetScope.allSpec[i].items);
+			}
+			var used=[];
+			for(var i in usedList){
+				used=used.concat(usedList[i].items);
+			}
+			var disList=[];
+			for(var i in all){
+				var flag=true;
+				for(var e in used){
+					if(all[i].id==used[e].id){
+						flag=false;
+						break;
+					}
+				}
+				if(flag){disList.push(all[i])}
+			}
+
+			
+			var type=$('#J_prodet_type');
+			for(var i in disList){
+				var o=disList[i];
+				type.find('li[data-id="'+o.id+'"]').addClass('dis');
+			}
+		}
+
+		function sksFilter(sks,func){
 			var result=[];
 			for(var i in sks){
 				var o=sks[i];		
-				for(var e in o.spec){
-					var oo=o.spec[e];
-					if(oo.itemId==itemId){
-						result.push(o);
-					}
+				if(func(o)){
+					result.push(o);
 				}
 			}
 			return result;
-		}*/
+		}
 
 		function mkSpec(sks){
 			var specArr={};
@@ -396,17 +446,23 @@
 					id:spec[0].typeId,
 					items:[]
 				}
+				//用于去重复
+				var str='';
 				for(var e in spec){
-					o.items.push({
-						label:spec[e].item,
-						id:spec[e].itemId
-					});
+					if(str.indexOf(spec[e].itemId)==-1){
+						o.items.push({
+							label:spec[e].item,
+							id:spec[e].itemId
+						});
+						str+=spec[e].itemId+',';
+					}
 				}
 				allSpec.push(o);
 			}
 			return allSpec;
 		}
-		Handlebars.registerHelper('getPrice', function(bean){
+
+		function getPrice(bean){
 			var b=bean.sks[0].price,
 				l=bean.sks[0].price;
 
@@ -423,6 +479,9 @@
 				str+='-￥'+b/100;
 			}
 			return str;
+		}
+		Handlebars.registerHelper('getPrice', function(bean){
+			return getPrice(bean);
 	    });
 	</script>
 </body>

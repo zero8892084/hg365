@@ -100,18 +100,25 @@
 		}
 	}
 
-	Counter.prototype.get = function() {
+	Counter.prototype.getVal = function() {
 		return this.value;
 	};
 
+	Counter.prototype.setMax = function(max) {
+		this.cfg.max=max;
+		var val=this.getVal();
+		if(parseInt(val)>parseInt(max)){
+			this.set(max);
+		}
+	};
+
 	$.fn.makeCounter=function(cfg){
-		new Counter({
+		return new Counter({
 			ele:this,
 			max:cfg.max,
 			min:cfg.min,
 			value:cfg.val,
 			callback:cfg.callback
 		});
-		return this;
 	}
 })(window,$);

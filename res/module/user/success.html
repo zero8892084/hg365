@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>模板</title>
+<% include ../include/res.html %>
+</head>
+<body>
+	<div id="J_content" class="hg-content">
+		<% include ../include/head.html %>
+		<div id="J_body" class="hg-body">
+			<div class="result-webchat fn-clear">
+				<img src="../../theme/default/images/logo.png"/>
+				<span class="hg-iconfont hg-iconfont-rarrow fn-right"></span>
+				<div class="result-webchat-text">
+					<div class="hg-text">点我关注海购365微信服务号</div>
+					<div class="hg-desc">掌握最新订单状态，享受实时物流信息推送服务</div>
+				</div>
+			</div>
+			<div class="result-icon">
+				<img src="../../theme/default/images/success.png">
+				<p class="hg-title">支付成功</p>
+			</div>
+			<div class="hg-btn hg-btn-red-l" id="">查看订单</div>
+		</div>
+		<% include ../include/foot.html %>
+	</div>
+	<% include ../include/js.html %>
+	<script type="text/javascript">
+		$('#J_head_title').html('支付成功');
+	</script>
+</body>
+</html>

@@ -91,6 +91,9 @@
             },
             "editAddress":{//需要修改的地址
                   key:'editAddress'
+            },
+            "settlePros":{//需要结算的商品
+                  key:'settlePros'
             }
       }
       window.cacheCfg=cache;

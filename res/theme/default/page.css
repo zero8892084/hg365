@@ -149,6 +149,9 @@ body .fn-hide-vb{
     margin-right:.05rem;
     box-sizing:border-box;
 }
+.prodet-type-list .dis{
+    color:#DCDCDC;
+}
 .prodet-type-list .cur{
     border:#F15353 solid 1px;
     color:#E3010D;
@@ -170,7 +173,7 @@ body .fn-hide-vb{
     text-align: center;
 }
 .prodet-tax{
-    margin:.15rem 0;
+    margin:.2rem 0;
 }
 .prodet-exp{
     font-size: 15px;
@@ -348,6 +351,44 @@ body .fn-hide-vb{
     border-bottom:1px solid #E8E8E8;
 }
 /*address.html end*/
+
+/*result success.html fail.html start*/
+.result-webchat{
+    padding:.2rem .1rem .2rem .4rem;
+    background-color: #FFF;
+}
+.result-webchat img{
+    width:.8rem;
+    float: left;
+    display: block;
+}
+.result-webchat-text{
+    width:4rem;
+    margin-left:.2rem;
+    text-align: left;
+    float: left;
+}
+.result-webchat-text .hg-text{
+    font-size: 14px;
+}
+.result-webchat-text .hg-desc{
+    font-size: 13px;
+    line-height: 18px;
+}
+.result-webchat .hg-iconfont-rarrow{
+    margin-top:.3rem;
+}
+.result-icon{
+    text-align: center;
+    padding:1rem;
+}
+.result-icon img{
+    width:2rem;
+}
+.result-icon .hg-title{
+    font-weight: bold;
+}
+/*result success.html fail.html end*/
 
 
 

@@ -30,7 +30,7 @@
 						<span class="hg-text-price hg-slefoot-text"  id="J_shopar_all">-</span>
 					</div>
 				</div>
-				<span class="hg-btn hg-btn-red fn-right">结 算</span>
+				<span class="hg-btn hg-btn-red fn-right" id="J_shopcar_tosettle">结 算</span>
 			</div>
 		</div>
 		<% include ../include/foot.html %>
@@ -177,6 +177,24 @@
 				window.shopCarSC.data.setAllCheck(!flag);
 			});
 
+			//去结算
+			$('#J_shopcar_tosettle').on('touchstart',function(){
+				if($(this).hasClass('hg-btn-disabled')) return;
+				var list=window.shopCarSC.data.filter(function(o){
+					return o.check&&o.canCheck;
+				});
+				var newArr=[];
+				for(var i in list){
+					newArr.push({
+						number:list[i].number,
+						id:list[i].id
+					});
+				}
+				hg.cache.set('settlePros',newArr);
+				hg.cache.del('chooseAddress');
+				window.location.href='settlement.html';
+			});
+
 			//数据对象发生改变的时候触发这个事件
 			window.shopCarSC.data.on(ShopcarData.DATA_CHANGE,function(e){
 				updateStore(e.storeId);
@@ -195,7 +213,6 @@
 				}else{
 					store.removeClass(cla);
 				}
-
 				var all=$('#J_shopcar_select_all .hg-store-check');			
 				if(e.all){
 					all.addClass(cla);
@@ -248,7 +265,6 @@
 			if(storeCount.crossNum==1){
 				wran.addClass('fn-hide');
 			}else{
-				
 				if(storeCount.crossTotal>100000){
 					wran.removeClass('fn-hide').find('.hg-warn-text').html('海关规定在同一个店铺购买多件商品时，跨境的总额不能大于1000元。');
 				}else{
@@ -263,6 +279,24 @@
 			$('#J_shopar_proall').html('￥'+proTotal/100);
 			$('#J_shopar_taxall').html('￥'+all.taxTotal/100);
 			$('#J_shopar_all').html('￥'+(proTotal+all.taxTotal)/100);
+
+			var flag=true;
+			if(parseInt(proTotal+all.taxTotal)==0){
+				flag=false;
+			}
+			$('#J_shopcar>li').each(function(){
+				var storeId=$(this).data('storeid');
+				var c=window.shopCarSC.data.countStore(storeId);
+				if(c.crossNum!=1&&c.crossTotal>100000){
+					flag=false;
+				}
+			});
+
+			if(flag){
+				$('#J_shopcar_tosettle').removeClass('hg-btn-disabled');
+			}else{
+				$('#J_shopcar_tosettle').addClass('hg-btn-disabled');
+			}
 		}
 
 		function updateCheck(id,flag){
@@ -433,6 +467,15 @@
 				return this.data[i];
 			}
 		}
+	}
+	ShopcarData.prototype.filter=function(func){
+		var newArr=[];
+		for(var i =0;i<this.data.length;i++){
+			if(func(this.data[i])){
+				newArr.push(this.data[i]);	
+			}
+		}
+		return newArr;
 	}
 	</script>
 </body>
